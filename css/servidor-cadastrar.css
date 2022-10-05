@@ -21,13 +21,27 @@ form .form-group {
 
 .btn {
   display: block;
-  margin: 10px auto;
+  margin: 10px;
 }
 
 .hidden {
   display: none;
 }
 
-.flex {
+.button-group {
   display: flex;
+  width: min-content;
+  margin: 0 auto;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 500px) {
+  .button-group {
+    display: block;
+    width: 100%;
+  }
+
+  button {
+    width: 80%;
+  }
 }
