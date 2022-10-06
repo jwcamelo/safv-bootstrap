@@ -35,6 +35,10 @@ form .form-group {
   justify-content: space-around;
 }
 
+.alert {
+  text-align: center;
+}
+
 @media screen and (max-width: 500px) {
   .button-group {
     display: block;

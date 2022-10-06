@@ -133,35 +133,59 @@
               <div class="form-group col-12">
                 <label class="form-label" for="nome">Nome completo</label>
                 <input class="form-control" type="text" id="nome" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O nome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-sm-4">
                 <label class="form-label" for="cpf">CPF</label>
                 <input class="form-control mascara-cpf" type="text" id="cpf" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe um número de CPF válido!
+                </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="rg">RG</label>
                 <input class="form-control mascara-rg" type="text" id="rg">
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe um número de RG válido!
+                </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="dataNascimento">Data de nasc.</label>
                 <input class="form-control mascara-data" type="text" id="dataNascimento" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe a Data de Nascimento no formato dd/MM/yyyy
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-sm-4">
                 <label class="form-label" for="matricula">Matrícula</label>
                 <input class="form-control" type="text" id="matricula" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  A matrícula deve ser preenchida apenas com números
+                </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="funcao">Função</label>
                 <input class="form-control" type="text" id="funcao" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O nome da função deve ser preenchido apenas com letras e deve conter mais de 4 letras.
+                </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="setor">Setor</label>
                 <input class="form-control" type="text" id="setor" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O nome do setor deve ser preenchido apenas com letras e deve conter mais de 4 letras.
+                </div>
               </div>
+            </div>
+            <div class="alert alert-danger d-none" role="alert">
+              Todos os campos do formulário devem ser preenchidos corretamente!
             </div>
             <div class="button-group">
               <button type="reset" class="btn btn-danger btn-limpar">Limpar</button>
@@ -177,10 +201,16 @@
               <div class="form-group col-sm-9">
                 <label class="form-label" for="logradouro">Logradouro</label>
                 <input class="form-control" type="text" id="logradouro" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O nome do logradouro deve conter mais de 4 caracteres.
+                </div>
               </div>
               <div class="form-group col-sm-3">
                 <label class="form-label" for="numero">Numero</label>
-                <input class="form-control" type="text" id="numero" required>
+                <input class="form-control" type="number" id="numero" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O numero do imóvel deve conter apenas caracteres numéricos.
+                </div>
               </div>
             </div>
 
@@ -188,6 +218,9 @@
               <div class="form-group col-sm-4">
                 <label class="form-label" for="cidade">Cidade</label>
                 <input class="form-control" type="text" id="cidade" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O nome da cidade deve conter apenas letras e deve conter mais de 2 letras.
+                </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="estado">Estado</label>
@@ -195,18 +228,27 @@
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="cep">CEP</label>
-                <input class="form-control" type="text" id="cep" required>
+                <input class="form-control mascara-cep" type="text" id="cep" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe um CEP válido!
+                </div>
               </div>
             </div>
 
             <div class="row">
               <div class="form-group col-sm-6">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" type="text" id="email" required>
+                <input class="form-control" type="email" id="email" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe um e-mail válido contendo apenas um caractere @
+                </div>
               </div>
               <div class="form-group col-sm-6">
                 <label class="form-label" for="telefone">Telefone</label>
-                <input class="form-control" type="text" id="telefone" required>
+                <input class="form-control mascara-telefone" type="tel" id="telefone" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe um número de telefone válido
+                </div>
               </div>
             </div>
             <div class="button-group">
@@ -228,9 +270,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
-  <script src="js/jquery.js"></script>
   <script src="js/maskedinput.js"></script>
   <script src="js/util.js"></script>
+  <script src="js/validacoes.js"></script>
 
 
 </body>
