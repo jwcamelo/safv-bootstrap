@@ -24,4 +24,18 @@ jQuery(function ($) {
     $('.sidebar').removeClass('active');
   });
 
-})
+});
+
+export function limparCampos(listaDeCampos) {
+  for (let campo of listaDeCampos) {
+    campo.classList.remove('is-invalid');
+    campo.classList.remove('is-valid');
+  }
+  document.querySelector('#form').reset();
+  document.querySelector('.page-2').classList.add('hidden');
+  document.querySelector('.page-1').classList.remove('hidden');
+}
+
+
+
+

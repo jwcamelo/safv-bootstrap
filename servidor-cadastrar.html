@@ -135,7 +135,7 @@
             <div class="row">
               <div class="form-group col-12">
                 <label class="form-label" for="nome">Nome completo</label>
-                <input class="form-control" type="text" id="nome" required>
+                <input class="form-control" type="text" id="nome" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O nome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
                 </div>
@@ -144,21 +144,21 @@
             <div class="row">
               <div class="form-group col-sm-4">
                 <label class="form-label" for="cpf">CPF</label>
-                <input class="form-control mascara-cpf" type="text" id="cpf" required>
+                <input class="form-control mascara-cpf" type="text" id="cpf" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um número de CPF válido!
                 </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="rg">RG</label>
-                <input class="form-control mascara-rg" type="text" id="rg">
+                <input class="form-control mascara-rg" type="text" id="rg" autocomplete="off">
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um número de RG válido!
                 </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="dataNascimento">Data de nasc.</label>
-                <input class="form-control mascara-data" type="text" id="dataNascimento" required>
+                <input class="form-control mascara-data" type="text" id="dataNascimento" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe a Data de Nascimento no formato dd/MM/yyyy
                 </div>
@@ -167,21 +167,21 @@
             <div class="row">
               <div class="form-group col-sm-4">
                 <label class="form-label" for="matricula">Matrícula</label>
-                <input class="form-control" type="text" id="matricula" required>
+                <input class="form-control" type="text" id="matricula" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   A matrícula deve ser preenchida apenas com números
                 </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="funcao">Função</label>
-                <input class="form-control" type="text" id="funcao" required>
+                <input class="form-control" type="text" id="funcao" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O nome da função deve ser preenchido apenas com letras e deve conter mais de 4 letras.
                 </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="setor">Setor</label>
-                <input class="form-control" type="text" id="setor" required>
+                <input class="form-control" type="text" id="setor" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O nome do setor deve ser preenchido apenas com letras e deve conter mais de 4 letras.
                 </div>
@@ -277,8 +277,9 @@
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
   <script src="js/maskedinput.js"></script>
-  <script src="js/util.js"></script>
-  <script src="js/validacoes.js"></script>
+  <script type="module" src="js/util.js"></script>
+  <script type="module" src="js/validation.js"></script>
+  <script type="module" src="js/servidor-cadastro.js"></script>
 
 
 </body>

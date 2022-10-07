@@ -1,110 +1,11 @@
-// Validação CPF
-function validacaoCPF(cpf) {
-  // Remove os pontos/traço da expressão regular, caso exista
-  cpf = cpf.replace(/[^\d]+/g, '');
-  if (cpf == '') return false;
-
-  // Elimina CPFs invalidos conhecidos    
-  if (cpf.length != 11 ||
-    cpf == "00000000000" ||
-    cpf == "11111111111" ||
-    cpf == "22222222222" ||
-    cpf == "33333333333" ||
-    cpf == "44444444444" ||
-    cpf == "55555555555" ||
-    cpf == "66666666666" ||
-    cpf == "77777777777" ||
-    cpf == "88888888888" ||
-    cpf == "99999999999")
-    return false;
-
-  // Valida 1o digito 
-  add = 0;
-
-  for (i = 0; i < 9; i++) {
-    add += parseInt(cpf.charAt(i)) * (10 - i);
-  }
-  rev = 11 - (add % 11);
-  if (rev == 10 || rev == 11) {
-    rev = 0;
-  }
-
-  if (rev != parseInt(cpf.charAt(9))) {
-    return false;
-  }
-
-  // Valida 2o digito 
-  add = 0;
-  for (i = 0; i < 10; i++) {
-    add += parseInt(cpf.charAt(i)) * (11 - i);
-  }
-  rev = 11 - (add % 11);
-  if (rev == 10 || rev == 11) {
-    rev = 0;
-  }
-  if (rev != parseInt(cpf.charAt(10))) {
-    return false;
-  }
-  return true;
-}
-
-// Validação CEP
-
-function validacaoCEP(strCEP) {
-  // Caso o CEP não esteja nesse formato ele é inválido!
-  var objER = /^[0-9]{2}\.[0-9]{3}-[0-9]{3}$/;
+import {
+  validacaoApenasLetras, validacaoCPF, validacaoApenasNumeros, validacaoEmail,
+  validacaoCEP, validacaoVazia
+} from './validation.js'
+import { limparCampos } from './util.js'
 
 
-  if (strCEP.length > 0) {
-    if (objER.test(strCEP))
-      return true;
-    else
-      return false;
-  }
-  else
-    return false;
-}
-
-
-// Validação de string com apenas letras
-
-function validacaoApenasLetras(inputtxt) {
-  const letters = /^[A-Za-z- ]+$/;
-  if (inputtxt.value.match(letters) && validacaoVazia(inputtxt)) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
-// Validação de string vazia
-
-function validacaoVazia(inputtxt) {
-  return inputtxt.value.trim().length > 4 ? true : false;
-}
-
-// Validação de string apenas com números
-
-function validacaoApenasNumeros(value) {
-  const numbers = /^[0-9]+$/;
-  if (value.match(numbers)) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
-function validacaoEmail(value) {
-  if (value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-// Aplicação das validações nos campos
+// Obtenção dos elementos 
 
 let nome = document.querySelector('#nome');
 let cpf = document.querySelector('#cpf');
@@ -121,9 +22,10 @@ let matricula = document.querySelector('#matricula');
 let funcao = document.querySelector('#funcao');
 let setor = document.querySelector('#setor');
 
+// Aplicação das validações nos campos
+
+
 function validaCampoNome() {
-
-
   if (validacaoApenasLetras(nome)) {
     nome.classList.remove('is-invalid');
     nome.classList.add('is-valid');
@@ -184,6 +86,7 @@ function validaCampoMatricula() {
   } else {
     matricula.classList.remove('is-valid');
     matricula.classList.add('is-invalid');
+    return false;
   }
 }
 
@@ -233,6 +136,7 @@ function validaCampoCEP() {
   } else {
     cep.classList.remove('is-valid');
     cep.classList.add('is-invalid');
+    return false;
   }
 }
 
@@ -296,8 +200,6 @@ function validaCampoEmail() {
   }
 }
 
-
-
 nome.addEventListener('keyup', validaCampoNome);
 cpf.addEventListener('keyup', validaCampoCpf);
 rg.addEventListener('keyup', validaCampoRg);
@@ -316,61 +218,19 @@ email.addEventListener('keyup', validaCampoEmail);
 
 // Ações 
 
-function limparCampos() {
-  nome.classList.remove('is-valid');
-  nome.classList.remove('is-invalid');
 
-  rg.classList.remove('is-valid');
-  rg.classList.remove('is-invalid');
+let listaDeCampos = [nome, cpf, rg, matricula, funcao, setor, dataNasc,
+  logradouro, numero, cidade, estado, cep, telefone, email]
 
-  cpf.classList.remove('is-valid');
-  cpf.classList.remove('is-invalid');
-
-  dataNasc.classList.remove('is-valid');
-  dataNasc.classList.remove('is-invalid');
-
-  matricula.classList.remove('is-valid');
-  matricula.classList.remove('is-invalid');
-
-  setor.classList.remove('is-valid');
-  setor.classList.remove('is-invalid');
-
-  logradouro.classList.remove('is-valid');
-  logradouro.classList.remove('is-invalid');
-
-  numero.classList.remove('is-valid');
-  numero.classList.remove('is-invalid');
-
-  cidade.classList.remove('is-valid');
-  cidade.classList.remove('is-invalid');
-
-  estado.classList.remove('is-valid');
-  estado.classList.remove('is-invalid');
-
-  cep.classList.remove('is-valid');
-  cep.classList.remove('is-invalid');
-
-  email.classList.remove('is-valid');
-  email.classList.remove('is-invalid');
-
-  telefone.classList.remove('is-valid');
-  telefone.classList.remove('is-invalid');
-
-  funcao.classList.remove('is-valid');
-  funcao.classList.remove('is-invalid');
-
-  document.querySelector('#form').reset();
-  document.querySelector('.page-2').classList.add('hidden');
-  document.querySelector('.page-1').classList.remove('hidden');
-
-}
 
 document.querySelector('.btn-next').addEventListener('click', function () {
-  if (validaCampoNome() && validaCampoCpf() && validaCampoRg() && validaCampoDataNasc() && validaCampoMatricula() && validaCampoFuncao()
-    && validaCampoSetor()) {
+
+  if (validaCampoNome() && validaCampoCpf() && validaCampoRg() && validaCampoDataNasc() && validaCampoMatricula()
+    && validaCampoFuncao() && validaCampoSetor()) {
     document.querySelector('.page-1').classList.add('hidden');
     document.querySelector('.page-2').classList.remove('hidden');
     document.querySelector('.alert-danger').classList.add('d-none');
+
   }
   else {
     document.querySelector('.alert-danger').classList.remove('d-none');
@@ -383,19 +243,29 @@ document.querySelector('.btn-back').addEventListener('click', function () {
 });
 
 const clearButtons = document.querySelectorAll('.btn-clear');
-for (button of clearButtons) {
-  button.addEventListener('click', limparCampos);
+for (let button of clearButtons) {
+  button.addEventListener('click', function () {
+    limparCampos(listaDeCampos)
+  });
 }
 
 document.querySelector('.btn-save').addEventListener('click', function () {
-  if (validaCampoLogradouro() && validaCampoNumero() && validaCampoCidade() && validaCampoEstado() &&
-    validaCampoCEP() && validaCampoEmail() && validaCampoTelefone()) {
-    alert('dados salvos');
-    limparCampos();
+  if (validaCampoLogradouro() && validaCampoNumero() && validaCampoCidade() && validaCampoEstado() && validaCampoCEP()
+    && validaCampoEmail() && validaCampoTelefone()) {
+    alert("dados salvos")
+    limparCampos(listaDeCampos);
     document.querySelector('#alert2').classList.add('d-none');
+
   } else {
     document.querySelector('#alert2').classList.remove('d-none');
   }
 })
+
+
+
+
+
+
+
 
 
