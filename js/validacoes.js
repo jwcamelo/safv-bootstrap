@@ -356,6 +356,9 @@ function limparCampos() {
   telefone.classList.remove('is-valid');
   telefone.classList.remove('is-invalid');
 
+  funcao.classList.remove('is-valid');
+  funcao.classList.remove('is-invalid');
+
   document.querySelector('#form').reset();
   document.querySelector('.page-2').classList.add('hidden');
   document.querySelector('.page-1').classList.remove('hidden');
@@ -384,13 +387,13 @@ for (button of clearButtons) {
   button.addEventListener('click', limparCampos);
 }
 
-document.querySelector('.btn-save').addEventListener('click', function(){
-  if(validaCampoLogradouro() && validaCampoNumero() && validaCampoCidade() && validaCampoEstado() &&
-  validaCampoCEP() && validaCampoEmail() && validaCampoTelefone()){
+document.querySelector('.btn-save').addEventListener('click', function () {
+  if (validaCampoLogradouro() && validaCampoNumero() && validaCampoCidade() && validaCampoEstado() &&
+    validaCampoCEP() && validaCampoEmail() && validaCampoTelefone()) {
     alert('dados salvos');
     limparCampos();
     document.querySelector('#alert2').classList.add('d-none');
-  }else{
+  } else {
     document.querySelector('#alert2').classList.remove('d-none');
   }
 })
