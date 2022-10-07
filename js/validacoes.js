@@ -96,12 +96,33 @@ function validacaoApenasNumeros(value) {
   }
 }
 
+function validacaoEmail(value) {
+  if (value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 // Aplicação das validações nos campos
 
+let nome = document.querySelector('#nome');
+let cpf = document.querySelector('#cpf');
+let rg = document.querySelector('#rg');
+let dataNasc = document.querySelector('#dataNascimento');
+let logradouro = document.querySelector('#logradouro');
+let numero = document.querySelector('#numero');
+let cidade = document.querySelector('#cidade');
+let estado = document.querySelector('#estado');
+let cep = document.querySelector('#cep');
+let email = document.querySelector('#email');
+let telefone = document.querySelector('#telefone');
+let matricula = document.querySelector('#matricula');
+let funcao = document.querySelector('#funcao');
+let setor = document.querySelector('#setor');
 
 function validaCampoNome() {
-  let nome = document.querySelector('#nome');
+
 
   if (validacaoApenasLetras(nome)) {
     nome.classList.remove('is-invalid');
@@ -115,7 +136,7 @@ function validaCampoNome() {
 }
 
 function validaCampoCpf() {
-  let cpf = document.querySelector('#cpf');
+
   if (validacaoCPF(cpf.value)) {
     cpf.classList.remove('is-invalid');
     cpf.classList.add('is-valid');
@@ -128,7 +149,7 @@ function validaCampoCpf() {
 }
 
 function validaCampoRg() {
-  let rg = document.querySelector('#rg');
+
   if (validacaoApenasNumeros(rg.value.replaceAll('.', ''))) {
     rg.classList.remove('is-invalid');
     rg.classList.add('is-valid');
@@ -140,14 +161,7 @@ function validaCampoRg() {
   }
 }
 
-let dataNasc = document.querySelector('#dataNascimento');
-let logradouro = document.querySelector('#logradouro');
-let numero = document.querySelector('#numero');
-let cidade = document.querySelector('#cidade');
-let estado = document.querySelector('#email');
-let cep = document.querySelector('#cep');
-let email = document.querySelector('#email');
-let telefone = document.querySelector('#telefone');
+
 
 function validaCampoDataNasc() {
   if (validacaoApenasNumeros(dataNasc.value.replaceAll('/', ''))) {
@@ -162,7 +176,7 @@ function validaCampoDataNasc() {
 }
 
 function validaCampoMatricula() {
-  let matricula = document.querySelector('#matricula');
+
   if (validacaoApenasNumeros(matricula.value)) {
     matricula.classList.remove('is-invalid');
     matricula.classList.add('is-valid');
@@ -174,7 +188,7 @@ function validaCampoMatricula() {
 }
 
 function validaCampoFuncao() {
-  let funcao = document.querySelector('#funcao');
+
   if (validacaoApenasLetras(funcao)) {
     funcao.classList.remove('is-invalid');
     funcao.classList.add('is-valid');
@@ -187,7 +201,7 @@ function validaCampoFuncao() {
 }
 
 function validaCampoSetor() {
-  let setor = document.querySelector('#setor');
+
   if (validacaoApenasLetras(setor)) {
     setor.classList.remove('is-invalid');
     setor.classList.add('is-valid');
@@ -223,7 +237,7 @@ function validaCampoCEP() {
 }
 
 function validaCampoNumero() {
-  if (validacaoApenasNumeros(numero.value) && numero.length < 10000000) {
+  if (validacaoApenasNumeros(numero.value)) {
     numero.classList.remove('is-invalid');
     numero.classList.add('is-valid');
     return true;
@@ -270,6 +284,18 @@ function validaCampoTelefone() {
   }
 }
 
+function validaCampoEmail() {
+  if (validacaoEmail(email.value)) {
+    email.classList.remove('is-invalid');
+    email.classList.add('is-valid');
+    return true;
+  } else {
+    email.classList.remove('is-valid');
+    email.classList.add('is-invalid');
+    return false;
+  }
+}
+
 
 
 nome.addEventListener('keyup', validaCampoNome);
@@ -286,11 +312,55 @@ cidade.addEventListener('keyup', validaCampoCidade);
 estado.addEventListener('keyup', validaCampoEstado);
 cep.addEventListener('keyup', validaCampoCEP);
 telefone.addEventListener('keyup', validaCampoTelefone);
+email.addEventListener('keyup', validaCampoEmail);
 
+// Ações 
 
+function limparCampos() {
+  nome.classList.remove('is-valid');
+  nome.classList.remove('is-invalid');
 
+  rg.classList.remove('is-valid');
+  rg.classList.remove('is-invalid');
 
+  cpf.classList.remove('is-valid');
+  cpf.classList.remove('is-invalid');
 
+  dataNasc.classList.remove('is-valid');
+  dataNasc.classList.remove('is-invalid');
+
+  matricula.classList.remove('is-valid');
+  matricula.classList.remove('is-invalid');
+
+  setor.classList.remove('is-valid');
+  setor.classList.remove('is-invalid');
+
+  logradouro.classList.remove('is-valid');
+  logradouro.classList.remove('is-invalid');
+
+  numero.classList.remove('is-valid');
+  numero.classList.remove('is-invalid');
+
+  cidade.classList.remove('is-valid');
+  cidade.classList.remove('is-invalid');
+
+  estado.classList.remove('is-valid');
+  estado.classList.remove('is-invalid');
+
+  cep.classList.remove('is-valid');
+  cep.classList.remove('is-invalid');
+
+  email.classList.remove('is-valid');
+  email.classList.remove('is-invalid');
+
+  telefone.classList.remove('is-valid');
+  telefone.classList.remove('is-invalid');
+
+  document.querySelector('#form').reset();
+  document.querySelector('.page-2').classList.add('hidden');
+  document.querySelector('.page-1').classList.remove('hidden');
+
+}
 
 document.querySelector('.btn-next').addEventListener('click', function () {
   if (validaCampoNome() && validaCampoCpf() && validaCampoRg() && validaCampoDataNasc() && validaCampoMatricula() && validaCampoFuncao()
@@ -298,10 +368,31 @@ document.querySelector('.btn-next').addEventListener('click', function () {
     document.querySelector('.page-1').classList.add('hidden');
     document.querySelector('.page-2').classList.remove('hidden');
     document.querySelector('.alert-danger').classList.add('d-none');
-    alert('ok')
   }
   else {
     document.querySelector('.alert-danger').classList.remove('d-none');
   }
+});
+
+document.querySelector('.btn-back').addEventListener('click', function () {
+  document.querySelector('.page-2').classList.add('hidden');
+  document.querySelector('.page-1').classList.remove('hidden');
+});
+
+const clearButtons = document.querySelectorAll('.btn-clear');
+for (button of clearButtons) {
+  button.addEventListener('click', limparCampos);
+}
+
+document.querySelector('.btn-save').addEventListener('click', function(){
+  if(validaCampoLogradouro() && validaCampoNumero() && validaCampoCidade() && validaCampoEstado() &&
+  validaCampoCEP() && validaCampoEmail() && validaCampoTelefone()){
+    alert('dados salvos');
+    limparCampos();
+    document.querySelector('#alert2').classList.add('d-none');
+  }else{
+    document.querySelector('#alert2').classList.remove('d-none');
+  }
 })
+
 

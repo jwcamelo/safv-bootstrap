@@ -126,7 +126,7 @@
 
       <div class="dashboard-content px-3 pt-4">
 
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" id="form" novalidate>
           <div class="page-1 container">
             <h1 class="text-center">Cadastro de Servidor</h1>
             <div class="row">
@@ -188,7 +188,7 @@
               Todos os campos do formulário devem ser preenchidos corretamente!
             </div>
             <div class="button-group">
-              <button type="reset" class="btn btn-danger btn-limpar">Limpar</button>
+              <button type="reset" class="btn btn-danger btn-clear">Limpar</button>
               <button type="button" class="btn btn-primary btn-next">Continuar</button>
 
             </div>
@@ -251,10 +251,13 @@
                 </div>
               </div>
             </div>
+            <div class="alert alert-danger d-none" id="alert2" role="alert">
+              Todos os campos do formulário devem ser preenchidos corretamente!
+            </div>
             <div class="button-group">
-              <button type="reset" class="btn btn-danger btn-limpar">Limpar</button>
+              <button type="button" class="btn btn-danger btn-clear">Limpar</button>
               <button type="button" class="btn btn-secondary btn-back">Voltar</button>
-              <button type="button" class="btn btn-success">Salvar</button>
+              <button type="button" class="btn btn-success btn-save">Salvar</button>
 
             </div>
 
