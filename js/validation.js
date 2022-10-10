@@ -19,12 +19,12 @@ function validacaoCPF(cpf) {
     return false;
 
   // Valida 1o digito 
-  var add = 0;
+  let add = 0;
 
   for (let i = 0; i < 9; i++) {
     add += parseInt(cpf.charAt(i)) * (10 - i);
   }
-  var rev = 11 - (add % 11);
+  let rev = 11 - (add % 11);
   if (rev == 10 || rev == 11) {
     rev = 0;
   }
@@ -52,7 +52,7 @@ function validacaoCPF(cpf) {
 
 function validacaoCEP(strCEP) {
   // Caso o CEP não esteja nesse formato ele é inválido!
-  var objER = /^[0-9]{2}\.[0-9]{3}-[0-9]{3}$/;
+  let objER = /^[0-9]{2}\.[0-9]{3}-[0-9]{3}$/;
 
 
   if (strCEP.length > 0) {
@@ -70,12 +70,7 @@ function validacaoCEP(strCEP) {
 
 function validacaoApenasLetras(inputtxt) {
   const letters = /^[A-Za-z ]+$/;
-  if (inputtxt.value.match(letters) && validacaoVazia(inputtxt)) {
-    return true;
-  }
-  else {
-    return false;
-  }
+  return (inputtxt.value.match(letters) && validacaoVazia(inputtxt))
 }
 
 // Validação de string vazia
@@ -87,21 +82,20 @@ function validacaoVazia(inputtxt) {
 // Validação de string apenas com números
 
 function validacaoApenasNumeros(value) {
-  const numbers = /^[0-9]+$/;
-  if (value.match(numbers)) {
-    return true;
-  }
-  else {
-    return false;
-  }
+  return value.match(/^[0-9]+$/);
 }
 
 function validacaoEmail(value) {
-  if (value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-    return true;
-  } else {
-    return false;
-  }
+  return value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 }
 
-export { validacaoApenasLetras, validacaoApenasNumeros, validacaoCEP, validacaoCPF, validacaoEmail, validacaoVazia }
+function validacaoData(value) {
+  const dataAtual = new Date();
+  const anoAtual = dataAtual.getFullYear();
+  let data = value.split('/');
+  for (let d of data) if (!validacaoApenasNumeros(d)) return false;
+  if (data[0] > 31 || data[1] > 12 || data[2] < 1920 || data[2] > anoAtual - 18) return false;
+  return !((data[1] == 2 || data[1] == 4 || data[1] == 6 || data[1] == 9 || data[1] == 11) && data[1] > 30);
+}
+
+export { validacaoApenasLetras, validacaoApenasNumeros, validacaoCEP, validacaoCPF, validacaoEmail, validacaoVazia, validacaoData }

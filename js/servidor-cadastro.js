@@ -1,6 +1,6 @@
 import {
   validacaoApenasLetras, validacaoCPF, validacaoApenasNumeros, validacaoEmail,
-  validacaoCEP, validacaoVazia
+  validacaoCEP, validacaoVazia, validacaoData
 } from './validation.js'
 import { limparCampos } from './util.js'
 
@@ -66,7 +66,7 @@ function validaCampoRg() {
 
 
 function validaCampoDataNasc() {
-  if (validacaoApenasNumeros(dataNasc.value.replaceAll('/', ''))) {
+  if (validacaoData(dataNasc.value)) {
     dataNasc.classList.remove('is-invalid');
     dataNasc.classList.add('is-valid');
     return true;
