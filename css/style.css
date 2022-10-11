@@ -2,17 +2,23 @@ body {
   background: #eee;
 }
 
-#side_nav {
-  background: #193073;
-  min-width: 250px;
-  max-width: 250px;
-  transition: all 0.3s;
-}
-
 .content {
   min-height: 100vh;
   width: 100%;
 }
+
+.dropdown a {
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown a,
+.dropdown a:hover,
+.dropdown a.show {
+  background: none;
+  border: none;
+}
+
 
 hr.h-color {
   background: #eee;
@@ -20,6 +26,15 @@ hr.h-color {
 
 i {
   margin-right: 10px;
+}
+
+form h4 {
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.navbar {
+  background: #cad2e5;
 }
 
 .sidebar li.active {
@@ -36,23 +51,25 @@ i {
   color: #fff;
 }
 
-.dropdown a {
-  width: 100%;
-  text-align: left;
+#side_nav {
+  background: #193073;
+  min-width: 250px;
+  max-width: 250px;
+  transition: all 0.3s;
 }
 
-.dropdown a,
-.dropdown a:hover,
-.dropdown a.show {
-  background: none;
-  border: none;
+table {
+  text-align: center;
 }
 
-.navbar {
-  background: #cad2e5;
+td i {
+  margin-left: 20px;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
+
+
+@media screen and (max-width: 880px) {
   #side_nav {
     margin-left: -250px;
     position: absolute;
@@ -63,5 +80,17 @@ i {
   #side_nav.active {
     margin-left: 0;
 
+  }
+}
+
+@media screen and (max-width:550px) {
+  .visible-md-block {
+    display: none;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .visible-sm-block {
+    display: none;
   }
 }

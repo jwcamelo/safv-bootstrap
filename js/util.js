@@ -26,15 +26,41 @@ jQuery(function ($) {
 
 });
 
+
+// Funções de botões 
+
 export function limparCampos(listaDeCampos) {
-  for (let campo of listaDeCampos) {
-    campo.classList.remove('is-invalid');
-    campo.classList.remove('is-valid');
+  if (listaDeCampos) {
+    for (let campo of listaDeCampos) {
+      campo.classList.remove('is-invalid');
+      campo.classList.remove('is-valid');
+
+      document.querySelector('#form').reset();
+      document.querySelector('.page-2').classList.add('hidden');
+      document.querySelector('.page-1').classList.remove('hidden');
+    }
   }
-  document.querySelector('#form').reset();
+
+}
+
+export function btnContinuar(condicao) {
+  if (condicao) {
+    document.querySelector('.page-1').classList.add('hidden');
+    document.querySelector('.page-2').classList.remove('hidden');
+    document.querySelector('.alert-danger').classList.add('d-none');
+
+  }
+  else {
+    console.log("condicao = " + condicao)
+    document.querySelector('.alert-danger').classList.remove('d-none');
+  }
+}
+
+export function btnVoltar() {
   document.querySelector('.page-2').classList.add('hidden');
   document.querySelector('.page-1').classList.remove('hidden');
 }
+
 
 
 

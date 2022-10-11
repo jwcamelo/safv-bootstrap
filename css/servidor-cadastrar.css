@@ -1,30 +1,10 @@
-.page-1,
-.page-2 {
-  height: min-content;
-  padding: 20px;
-  border-radius: 12px;
-  background: #ffff;
-
-}
-
-.dashboard-content h2 {
-  font-size: 36px;
-  margin-bottom: 25px;
-}
-
-
-form .form-group {
-  margin-bottom: 12px;
-  padding: 0 2px;
+.alert {
+  text-align: center;
 }
 
 .button-group button {
   display: block;
   margin: 10px;
-}
-
-.hidden {
-  display: none;
 }
 
 .button-group {
@@ -34,9 +14,37 @@ form .form-group {
   justify-content: space-around;
 }
 
-.alert {
-  text-align: center;
+.dashboard-content h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
 }
+
+form .form-group {
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+.page-1,
+.page-2 {
+  height: min-content;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffff;
+}
+
+table {
+  margin-top: 20px;
+}
+
+
+
+
+
+
 
 
 @media screen and (max-width: 500px) {

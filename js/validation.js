@@ -95,7 +95,7 @@ function validacaoData(value) {
   let data = value.split('/');
   for (let d of data) if (!validacaoApenasNumeros(d)) return false;
   if (data[0] > 31 || data[1] > 12 || data[2] < 1920 || data[2] > anoAtual - 18) return false;
-  return !((data[1] == 2 || data[1] == 4 || data[1] == 6 || data[1] == 9 || data[1] == 11) && data[1] > 30);
+  return !((data[1] == 2 || data[1] == 4 || data[1] == 6 || data[1] == 9 || data[1] == 11) && data[0] > 30);
 }
 
 export { validacaoApenasLetras, validacaoApenasNumeros, validacaoCEP, validacaoCPF, validacaoEmail, validacaoVazia, validacaoData }
