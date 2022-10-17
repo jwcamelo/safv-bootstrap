@@ -150,27 +150,51 @@
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                 <label class="form-label" for="cpf">CPF</label>
                 <input class="form-control mascara-cpf" type="text" id="cpf" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um número de CPF válido!
                 </div>
               </div>
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                 <label class="form-label" for="rg">RG</label>
                 <input class="form-control mascara-rg" type="text" id="rg" autocomplete="off">
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um número de RG válido!
                 </div>
               </div>
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                 <label class="form-label" for="dataNascimento">Data de nasc.</label>
                 <input class="form-control mascara-data" type="text" id="dataNascimento" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                  Informe a Data de Nascimento no formato dd/MM/yyyy
+                  Informe a Data de Nascimento no formato dd/MM/yyyy. O servidor deve ser maior de idade.
                 </div>
               </div>
+              <div class="form-group col-sm-3">
+                <div>
+                  <label for="sexo" class="form-label">Sexo</label>
+                </div>
+                <div class="form-control field-sexo">
+                  <div class="form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" id="sexo-masculino" value="masculino"
+                      checked>
+                    <label class="form-check-label" for="sexo-masculino">
+                      Masculino
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" id="sexo-feminino" value="feminino">
+                    <label class="form-check-label" for="sexo-feminino">
+                      Feminino
+                    </label>
+                  </div>
+                </div>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe o sexo do servidor.
+                </div>
+              </div>
+
             </div>
             <div class="row">
               <div class="form-group col-sm-4">

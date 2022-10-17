@@ -9,6 +9,7 @@ const sobrenome = document.querySelector('#sobrenome');
 const cpf = document.querySelector('#cpf');
 const rg = document.querySelector('#rg');
 const dataNasc = document.querySelector('#dataNascimento');
+const sexo = document.querySelector('.field-sexo');
 const logradouro = document.querySelector('#logradouro');
 const numero = document.querySelector('#numero');
 const cidade = document.querySelector('#cidade');
@@ -21,7 +22,6 @@ const funcao = document.querySelector('#funcao');
 const setor = document.querySelector('#setor');
 
 export function validaCamposDadosServidor() {
-
   function validaCampoNome() {
     if (validacaoApenasLetras(nome)) {
       nome.classList.remove('is-invalid');
@@ -47,7 +47,6 @@ export function validaCamposDadosServidor() {
   }
 
   function validaCampoCpf() {
-
     if (validacaoCPF(cpf.value)) {
       cpf.classList.remove('is-invalid');
       cpf.classList.add('is-valid');
@@ -60,7 +59,6 @@ export function validaCamposDadosServidor() {
   }
 
   function validaCampoRg() {
-
     if (validacaoApenasNumeros(rg.value.replaceAll('.', ''))) {
       rg.classList.remove('is-invalid');
       rg.classList.add('is-valid');
@@ -71,8 +69,6 @@ export function validaCamposDadosServidor() {
       return false;
     }
   }
-
-
 
   function validaCampoDataNasc() {
     if (validacaoData(dataNasc.value)) {
@@ -86,8 +82,20 @@ export function validaCamposDadosServidor() {
     }
   }
 
-  function validaCampoMatricula() {
+  function validaCampoSexo() {
+    if (document.querySelector('input[name="sexo"]:checked').value == "masculino"
+      || document.querySelector('input[name="sexo"]:checked').value == "feminino") {
+      sexo.classList.remove('is-invalid');
+      sexo.classList.add('is-valid');
+      return true;
+    } else {
+      sexo.classList.remove('is-valid');
+      sexo.classList.add('is-invalid');
+      return false;
+    }
+  }
 
+  function validaCampoMatricula() {
     if (validacaoApenasNumeros(matricula.value)) {
       matricula.classList.remove('is-invalid');
       matricula.classList.add('is-valid');
@@ -100,7 +108,6 @@ export function validaCamposDadosServidor() {
   }
 
   function validaCampoFuncao() {
-
     if (validacaoApenasLetras(funcao)) {
       funcao.classList.remove('is-invalid');
       funcao.classList.add('is-valid');
@@ -113,7 +120,6 @@ export function validaCamposDadosServidor() {
   }
 
   function validaCampoSetor() {
-
     if (setor.options[setor.selectedIndex].value > 0) {
       setor.classList.remove('is-invalid');
       setor.classList.add('is-valid');
@@ -133,8 +139,9 @@ export function validaCamposDadosServidor() {
   funcao.addEventListener('keyup', validaCampoFuncao);
   setor.addEventListener('change', validaCampoSetor);
   dataNasc.addEventListener('keyup', validaCampoDataNasc);
+  sexo.addEventListener('click', validaCampoSexo);
 
-  return (validaCampoNome() && validaCampoSobrenome() && validaCampoCpf() && validaCampoRg() && validaCampoDataNasc() && validaCampoMatricula()
+  return (validaCampoNome() && validaCampoSobrenome() && validaCampoCpf() && validaCampoRg() && validaCampoDataNasc() && validaCampoSexo() && validaCampoMatricula()
     && validaCampoFuncao() && validaCampoSetor());
 
 }
@@ -237,4 +244,4 @@ export function validaCamposContatoServidor() {
 }
 
 export const listaDeCampos = [nome, sobrenome, cpf, rg, dataNasc, matricula, funcao, setor,
-  logradouro, numero, cidade, estado, cep, email, telefone]
+  logradouro, numero, cidade, estado, cep, email, telefone, sexo]

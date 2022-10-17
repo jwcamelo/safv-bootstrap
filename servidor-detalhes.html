@@ -120,14 +120,51 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Profile</a>
               </li>
-
           </div>
         </div>
       </nav>
 
       <!--MAIN CONTENT-->
-
       <div class="dashboard-content px-3 pt-4">
+        <!-- Save Changes Modal -->
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="saveModalTitle">Alteração de dados do Servidor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Os dados alterados irão sobrepor os dados cadastrados.
+                Deseja continuar?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn-saveChanges">Salvar mudanças</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Servidor Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Excluir servidor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Os dados do servidor serão excluídos do sistema.
+                Deseja continuar?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-warning" id="btn-confirmDelete">Confirmar exclusão</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <form class="needs-validation" id="form" novalidate>
           <div class="page-1 container">
@@ -150,25 +187,48 @@
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                 <label class="form-label" for="cpf">CPF</label>
                 <input class="form-control mascara-cpf" type="text" id="cpf" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um número de CPF válido!
                 </div>
               </div>
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                 <label class="form-label" for="rg">RG</label>
                 <input class="form-control mascara-rg" type="text" id="rg" autocomplete="off">
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um número de RG válido!
                 </div>
               </div>
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                 <label class="form-label" for="dataNascimento">Data de nasc.</label>
                 <input class="form-control mascara-data" type="text" id="dataNascimento" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe a Data de Nascimento no formato dd/MM/yyyy
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <div>
+                  <label for="sexo" class="form-label">Sexo</label>
+                </div>
+                <div class="form-control field-sexo">
+                  <div class="form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" id="sexo-masculino" value="masculino"
+                      checked>
+                    <label class="form-check-label" for="sexo-masculino">
+                      Masculino
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <input class="form-check-input" type="radio" name="sexo" id="sexo-feminino" value="feminino">
+                    <label class="form-check-label" for="sexo-feminino">
+                      Feminino
+                    </label>
+                  </div>
+                </div>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe o sexo do servidor.
                 </div>
               </div>
             </div>
@@ -212,7 +272,7 @@
               Todos os campos do formulário devem ser preenchidos corretamente!
             </div>
             <div class="button-group">
-              <button type="reset" class="btn btn-danger btn-clear">Limpar</button>
+              <button type="reset" class="btn btn-danger btn-exit">Sair</button>
               <button type="button" class="btn btn-primary btn-next">Continuar</button>
 
             </div>
@@ -312,15 +372,17 @@
               Todos os campos do formulário devem ser preenchidos corretamente!
             </div>
             <div class="button-group">
-              <button type="button" class="btn btn-danger btn-clear">Limpar</button>
-              <button type="button" class="btn btn-secondary btn-back">Voltar</button>
-              <button type="button" class="btn btn-success btn-update">Atualizar</button>
-
+              <div class="button-subgroup">
+                <button type="button" class="btn btn-danger btn-exit">Sair</button>
+                <button type="button" class="btn btn-secondary btn-back">Voltar</button>
+              </div>
+              <div class="button-subgroup">
+                <button type="button" class="btn btn-success btn-update">Atualizar</button>
+                <button type="button" class="btn btn-warning btn-delete">Excluir</button>
+              </div>
             </div>
-
           </div>
         </form>
-
       </div>
     </div>
   </div>

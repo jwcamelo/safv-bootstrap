@@ -50,6 +50,7 @@ salvar.addEventListener('click', function () {
       sobrenome: listaDeCampos[1].value,
       cpf: listaDeCampos[2].value,
       rg: listaDeCampos[3].value,
+      sexo: document.querySelector('input[name="sexo"]:checked').value,
       dataDeNascimento: listaDeCampos[4].value,
       matricula: listaDeCampos[5].value,
       funcao: listaDeCampos[6].value,

@@ -36,16 +36,16 @@ form .form-group {
   background: #ffff;
 }
 
-table {
-  margin-top: 20px;
+.field-sexo {
+  border: none;
+  display: flex;
 }
 
 
 
-
-
-
-
+table {
+  margin-top: 20px;
+}
 
 @media screen and (max-width: 500px) {
   .button-group {

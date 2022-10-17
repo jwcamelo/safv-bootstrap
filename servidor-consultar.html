@@ -126,8 +126,28 @@
 
       <!-- MAIN CONTENT -->
       <div class="dashboard-content px-3 pt-4">
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Excluir servidor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Os dados do servidor serão excluídos do sistema.
+                Deseja continuar?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-warning" id="btn-confirmDelete">Confirmar exclusão</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="container page-1">
+          <a class="btn btn-primary" href="servidor-cadastrar.html" role="button">Novo servidor</a>
           <h1 class="text-center">Consultar Servidores</h1>
+
           <form action="">
 
           </form>
