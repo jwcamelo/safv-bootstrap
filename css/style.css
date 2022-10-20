@@ -2,9 +2,8 @@ body {
   background: #eee;
 }
 
-.button-subgroup {
-  display: flex;
-  width: 100%;
+button {
+  min-width: 80px;
 }
 
 .content {
@@ -105,8 +104,4 @@ td i {
     display: none;
   }
 
-  .button-subgroup {
-    width: 100%;
-    flex-wrap: wrap;
-  }
 }

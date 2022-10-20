@@ -2,26 +2,23 @@ import {
   validacaoApenasLetras, validacaoCPF, validacaoApenasNumeros, validacaoEmail,
   validacaoCEP, validacaoVazia, validacaoData
 } from './validation.js'
-import { limparCampos } from './util.js'
 
 const nome = document.querySelector('#nome');
 const sobrenome = document.querySelector('#sobrenome');
 const cpf = document.querySelector('#cpf');
-const rg = document.querySelector('#rg');
 const dataNasc = document.querySelector('#dataNascimento');
-const sexo = document.querySelector('.field-sexo');
 const logradouro = document.querySelector('#logradouro');
 const numero = document.querySelector('#numero');
-const cidade = document.querySelector('#cidade');
-const estado = document.querySelector('#estado');
 const cep = document.querySelector('#cep');
-const email = document.querySelector('#email');
-const telefone = document.querySelector('#telefone');
+const complemento = document.querySelector('#complemento');
 const matricula = document.querySelector('#matricula');
 const funcao = document.querySelector('#funcao');
 const setor = document.querySelector('#setor');
+const emailses = document.querySelector('#emailses');
+const email = document.querySelector('#email');
+const telefone = document.querySelector('#telefone');
 
-export function validaCamposDadosServidor() {
+export function validaServidor() {
   function validaCampoNome() {
     if (validacaoApenasLetras(nome)) {
       nome.classList.remove('is-invalid');
@@ -58,18 +55,6 @@ export function validaCamposDadosServidor() {
     }
   }
 
-  function validaCampoRg() {
-    if (validacaoApenasNumeros(rg.value.replaceAll('.', ''))) {
-      rg.classList.remove('is-invalid');
-      rg.classList.add('is-valid');
-      return true;
-    } else {
-      rg.classList.remove('is-valid');
-      rg.classList.add('is-invalid');
-      return false;
-    }
-  }
-
   function validaCampoDataNasc() {
     if (validacaoData(dataNasc.value)) {
       dataNasc.classList.remove('is-invalid');
@@ -78,19 +63,6 @@ export function validaCamposDadosServidor() {
     } else {
       dataNasc.classList.remove('is-valid');
       dataNasc.classList.add('is-invalid');
-      return false;
-    }
-  }
-
-  function validaCampoSexo() {
-    if (document.querySelector('input[name="sexo"]:checked').value == "masculino"
-      || document.querySelector('input[name="sexo"]:checked').value == "feminino") {
-      sexo.classList.remove('is-invalid');
-      sexo.classList.add('is-valid');
-      return true;
-    } else {
-      sexo.classList.remove('is-valid');
-      sexo.classList.add('is-invalid');
       return false;
     }
   }
@@ -108,7 +80,7 @@ export function validaCamposDadosServidor() {
   }
 
   function validaCampoFuncao() {
-    if (validacaoApenasLetras(funcao)) {
+    if (funcao.options[funcao.selectedIndex].value > 0) {
       funcao.classList.remove('is-invalid');
       funcao.classList.add('is-valid');
       return true;
@@ -131,22 +103,6 @@ export function validaCamposDadosServidor() {
     }
   }
 
-  nome.addEventListener('keyup', validaCampoNome);
-  sobrenome.addEventListener('keyup', validaCampoSobrenome);
-  cpf.addEventListener('keyup', validaCampoCpf);
-  rg.addEventListener('keyup', validaCampoRg);
-  matricula.addEventListener('keyup', validaCampoMatricula);
-  funcao.addEventListener('keyup', validaCampoFuncao);
-  setor.addEventListener('change', validaCampoSetor);
-  dataNasc.addEventListener('keyup', validaCampoDataNasc);
-  sexo.addEventListener('click', validaCampoSexo);
-
-  return (validaCampoNome() && validaCampoSobrenome() && validaCampoCpf() && validaCampoRg() && validaCampoDataNasc() && validaCampoSexo() && validaCampoMatricula()
-    && validaCampoFuncao() && validaCampoSetor());
-
-}
-
-export function validaCamposContatoServidor() {
   function validaCampoLogradouro() {
     if (validacaoVazia(logradouro) && logradouro.value.length > 4) {
       logradouro.classList.remove('is-invalid');
@@ -183,26 +139,14 @@ export function validaCamposContatoServidor() {
     }
   }
 
-  function validaCampoCidade() {
-    if (validacaoApenasLetras(cidade)) {
-      cidade.classList.remove('is-invalid');
-      cidade.classList.add('is-valid');
+  function validaCampoComplemento() {
+    if (validacaoVazia(complemento)) {
+      complemento.classList.remove('is-invalid');
+      complemento.classList.add('is-valid');
       return true;
     } else {
-      cidade.classList.remove('is-valid');
-      cidade.classList.add('is-invalid');
-      return false;
-    }
-  }
-
-  function validaCampoEstado() {
-    if (estado.options[estado.selectedIndex].value > 0) {
-      estado.classList.remove('is-invalid');
-      estado.classList.add('is-valid');
-      return true;
-    } else {
-      estado.classList.remove('is-valid');
-      estado.classList.add('is-invalid');
+      complemento.classList.remove('is-valid');
+      complemento.classList.add('is-invalid');
       return false;
     }
   }
@@ -231,17 +175,41 @@ export function validaCamposContatoServidor() {
     }
   }
 
+  function validaCampoEmailSES() {
+    if (validacaoEmail(emailses.value)) {
+      emailses.classList.remove('is-invalid');
+      emailses.classList.add('is-valid');
+      return true;
+    } else {
+      emailses.classList.remove('is-valid');
+      emailses.classList.add('is-invalid');
+      return false;
+    }
+  }
+
+  nome.addEventListener('keyup', validaCampoNome);
+  sobrenome.addEventListener('keyup', validaCampoSobrenome);
+  dataNasc.addEventListener('keyup', validaCampoDataNasc);
+  cpf.addEventListener('keyup', validaCampoCpf);
+  matricula.addEventListener('keyup', validaCampoMatricula);
+  funcao.addEventListener('keyup', validaCampoFuncao);
+  setor.addEventListener('change', validaCampoSetor);
   logradouro.addEventListener('keyup', validaCampoLogradouro);
   numero.addEventListener('keyup', validaCampoNumero);
-  cidade.addEventListener('keyup', validaCampoCidade);
-  estado.addEventListener('change', validaCampoEstado);
   cep.addEventListener('keyup', validaCampoCEP);
+  complemento.addEventListener('keyup', validaCampoComplemento)
   telefone.addEventListener('keyup', validaCampoTelefone);
   email.addEventListener('keyup', validaCampoEmail);
+  emailses.addEventListener('keyup', validaCampoEmailSES);
 
-  return (validaCampoLogradouro() && validaCampoNumero() && validaCampoCidade() && validaCampoEstado() && validaCampoCEP()
+  return (validaCampoNome() && validaCampoSobrenome() && validaCampoDataNasc() && validaCampoCpf()
+    && validaCampoMatricula() && validaCampoFuncao() && validaCampoSetor() && validaCampoLogradouro()
+    && validaCampoNumero() && validaCampoComplemento() && validaCampoCEP() && validaCampoEmailSES()
     && validaCampoEmail() && validaCampoTelefone());
 }
 
-export const listaDeCampos = [nome, sobrenome, cpf, rg, dataNasc, matricula, funcao, setor,
-  logradouro, numero, cidade, estado, cep, email, telefone, sexo]
+
+export const campos = {
+  nome, sobrenome, dataNasc, cpf, matricula, funcao, setor,
+  logradouro, numero, complemento, cep, emailses, email, telefone
+}

@@ -53,30 +53,27 @@ function validacaoCPF(cpf) {
 function validacaoCEP(strCEP) {
   // Caso o CEP não esteja nesse formato ele é inválido!
   let objER = /^[0-9]{2}\.[0-9]{3}-[0-9]{3}$/;
-
-
   if (strCEP.length > 0) {
     if (objER.test(strCEP))
       return true;
-    else
-      return false;
+    if (validacaoApenasNumeros(strCEP) && strCEP.length == 8)
+      return true;
   }
-  else
-    return false;
+  return false;
 }
 
+
+// Validação de string vazia
+
+function validacaoVazia(inputtxt) {
+  return inputtxt.value.trim().length > 3 ? true : false;
+}
 
 // Validação de string com apenas letras
 
 function validacaoApenasLetras(inputtxt) {
   const letters = /^[A-Za-z ]+$/;
   return (inputtxt.value.match(letters) && validacaoVazia(inputtxt))
-}
-
-// Validação de string vazia
-
-function validacaoVazia(inputtxt) {
-  return inputtxt.value.trim().length > 4 ? true : false;
 }
 
 // Validação de string apenas com números

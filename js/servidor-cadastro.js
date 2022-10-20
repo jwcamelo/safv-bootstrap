@@ -1,81 +1,86 @@
 
 import { limparCampos } from './util.js'
-import { validaCamposContatoServidor, validaCamposDadosServidor, listaDeCampos } from './servidor-fieldValidation.mjs';
+import { campos, validaServidor } from "./servidor-fieldValidation.mjs";
+import { sendHttpRequest } from "./xhr.js";
 
-validaCamposDadosServidor();
-validaCamposContatoServidor();
+//Preenchimento dropdown
+
+const urlSetores = "https://safvroma.herokuapp.com/setor";
+const urlFuncoes = "https://safvroma.herokuapp.com/funcao";
+
+sendHttpRequest('GET', urlSetores).then(setores => setores.map(setor => {
+  campos.setor.innerHTML += `
+    <option value="${setor.id}">${setor.nome}</option>
+  `
+}))
+
+sendHttpRequest('GET', urlFuncoes).then(funcoes => funcoes.map(funcao => {
+  campos.funcao.innerHTML += `
+    <option value="${funcao.id}">${funcao.nome}</option>
+  `
+}))
+
+validaServidor()
 
 //Ações
-
-//Voltar
-const voltar = document.querySelector('.btn-back');
-voltar.addEventListener('click', function () {
-  document.querySelector('.page-2').classList.add('hidden');
-  document.querySelector('.page-1').classList.remove('hidden');
-});
-
-//Continuar
-const continuar = document.querySelector('.btn-next');
-continuar.addEventListener('click', function () {
-  if (validaCamposDadosServidor()) {
-    document.querySelector('.page-1').classList.add('hidden');
-    document.querySelector('.page-2').classList.remove('hidden');
-    document.querySelector('.alert-danger').classList.add('d-none');
-
-  }
-  else {
-    console.log("condicao = " + validaCamposDadosServidor())
-    document.querySelector('.alert-danger').classList.remove('d-none');
-  }
-})
 
 //Limpar
 const limpar = document.querySelectorAll('.btn-clear')
 for (let button of limpar) {
   button.addEventListener('click', function () {
-    limparCampos(listaDeCampos);
+    limparCampos(campos);
     document.querySelector('.alert').classList.add('hidden');
   });
 }
 
+//Sair
+const sair = document.querySelector('.btn-exit');
+sair.addEventListener('click', function () {
+  window.location.href = `../servidor-consultar.html`
+});
 
 //Salvar
 let salvar = document.querySelector('.btn-save');
-
-salvar.addEventListener('click', function () {
-  if (validaCamposContatoServidor()) {
-    let servidores = JSON.parse(localStorage.getItem('servidores')) || [];
-    const servidor = {
-      nome: listaDeCampos[0].value,
-      sobrenome: listaDeCampos[1].value,
-      cpf: listaDeCampos[2].value,
-      rg: listaDeCampos[3].value,
-      sexo: document.querySelector('input[name="sexo"]:checked').value,
-      dataDeNascimento: listaDeCampos[4].value,
-      matricula: listaDeCampos[5].value,
-      funcao: listaDeCampos[6].value,
-      setor: listaDeCampos[7].options[listaDeCampos[7].selectedIndex].text,
-      logradouro: listaDeCampos[8].value,
-      numero: listaDeCampos[9].value,
-      cidade: listaDeCampos[10].value,
-      estado: listaDeCampos[11].options[listaDeCampos[11].selectedIndex].text,
-      cep: listaDeCampos[12].value,
-      email: listaDeCampos[13].value,
-      telefone: listaDeCampos[14].value
-    }
-
-    const servidoresAtualizado = [...servidores, servidor];
-    localStorage.setItem('servidores', JSON.stringify(servidoresAtualizado));
-    alert("dados salvos")
-    limparCampos(listaDeCampos);
-    document.querySelector('#alert2').classList.add('d-none');
+salvar.addEventListener('click', function (e) {
+  if (!validaServidor()) {
+    e.preventDefault();
+    $('#saveModal').modal({ show: false });
+    document.querySelector('.alert').classList.remove('d-none');
 
   } else {
-    document.querySelector('#alert2').classList.remove('d-none');
+    $('#saveModal').modal('show');
+    document.querySelector('.alert').classList.add('d-none');
   }
-})
+});
+
+const salvarServidor = () => {
+  sendHttpRequest('POST', `https://safvroma.herokuapp.com/funcionario/`, {
+
+    matricula: campos.matricula.value,
+    funcao: { id: parseInt(campos.funcao.value) },
+    setor: { id: parseInt(campos.setor.value) },
+    nome: campos.nome.value,
+    sobrenome: campos.sobrenome.value,
+    cpf: campos.cpf.value.replaceAll(".", "").replace("-", ""),
+    dataDeNascimento: campos.dataNasc.value,
+    logradouro: campos.logradouro.value,
+    numero: parseInt(campos.numero.value),
+    cep: parseInt(campos.cep.value.replace('.', "").replace('-', "")),
+    complemento: campos.complemento.value,
+    emailCorporativo: campos.emailses.value,
+    emailParticular: campos.email.value,
+    telefone: campos.telefone.value.replace(")", "").replace("(", "").replace("-", "")
+
+  }).then(console.log("dados salvos")).catch(err => { console.log(err) });
+
+  setTimeout(() => {
+    window.location.href = `../servidor-consultar.html`
+  }, "2000")
+}
 
 
+const confirmSalvar = document.querySelector('#btn-saveChanges');
+confirmSalvar.addEventListener('click', salvarServidor);
 
 
 

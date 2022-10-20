@@ -31,14 +31,13 @@ jQuery(function ($) {
 
 export function limparCampos(listaDeCampos) {
   if (listaDeCampos) {
-    for (let campo of listaDeCampos) {
-      campo.classList.remove('is-invalid');
-      campo.classList.remove('is-valid');
+    Object.keys(listaDeCampos).forEach((campo) => {
+      listaDeCampos[campo].classList.remove('is-invalid');
+      listaDeCampos[campo].classList.remove('is-valid');
 
       document.querySelector('#form').reset();
-      document.querySelector('.page-2').classList.add('hidden');
-      document.querySelector('.page-1').classList.remove('hidden');
-    }
+      document.querySelector('#nome').focus();
+    })
   }
 
 }

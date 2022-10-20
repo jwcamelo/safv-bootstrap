@@ -126,87 +126,76 @@
       </nav>
 
       <!--MAIN CONTENT-->
-
       <div class="dashboard-content px-3 pt-4">
+        <!-- Save Changes Modal -->
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="saveModalTitle">Alteração de dados do Servidor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Os dados alterados irão sobrepor os dados cadastrados.
+                Deseja continuar?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn-saveChanges">Salvar mudanças</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <form class="needs-validation" id="form" novalidate>
           <div class="page-1 container">
-            <h1 class="text-center">Cadastrar Servidor</h1>
+            <h1 class="text-center">Detalhes do Servidor</h1>
             <h4 class="text-center">Todos os campos são obrigatórios</h4>
             <div class="row">
-              <div class="form-group col-sm-6">
+              <div class="form-group col-md-4">
                 <label class="form-label" for="nome">Nome</label>
                 <input class="form-control" type="text" id="nome" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O nome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
                 </div>
               </div>
-              <div class="form-group col-sm-6">
+              <div class="form-group col-md-4">
                 <label class="form-label" for="Sobrenome">Sobrenome</label>
                 <input class="form-control" type="text" id="sobrenome" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O Sobrenome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-sm-3">
+              <div class="form-group col-md-2">
+                <label class="form-label" for="dataNascimento">Data de nascimento</label>
+                <input class="form-control mascara-data" type="text" id="dataNascimento" autocomplete="off" required>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe a Data de Nascimento no formato dd/MM/yyyy
+                </div>
+              </div>
+              <div class="form-group col-md-2">
                 <label class="form-label" for="cpf">CPF</label>
                 <input class="form-control mascara-cpf" type="text" id="cpf" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um número de CPF válido!
                 </div>
               </div>
-              <div class="form-group col-sm-3">
-                <label class="form-label" for="rg">RG</label>
-                <input class="form-control mascara-rg" type="text" id="rg" autocomplete="off">
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                  Informe um número de RG válido!
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <label class="form-label" for="dataNascimento">Data de nasc.</label>
-                <input class="form-control mascara-data" type="text" id="dataNascimento" autocomplete="off" required>
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                  Informe a Data de Nascimento no formato dd/MM/yyyy. O servidor deve ser maior de idade.
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div>
-                  <label for="sexo" class="form-label">Sexo</label>
-                </div>
-                <div class="form-control field-sexo">
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="sexo-masculino" value="masculino"
-                      checked>
-                    <label class="form-check-label" for="sexo-masculino">
-                      Masculino
-                    </label>
-                  </div>
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="sexo" id="sexo-feminino" value="feminino">
-                    <label class="form-check-label" for="sexo-feminino">
-                      Feminino
-                    </label>
-                  </div>
-                </div>
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                  Informe o sexo do servidor.
-                </div>
-              </div>
-
             </div>
             <div class="row">
               <div class="form-group col-sm-4">
                 <label class="form-label" for="matricula">Matrícula</label>
-                <input class="form-control" type="text" id="matricula" autocomplete="off" required>
+                <input class="form-control disabled" type="text" id="matricula" autocomplete="off" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   A matrícula deve ser preenchida apenas com números
                 </div>
               </div>
               <div class="form-group col-sm-4">
                 <label class="form-label" for="funcao">Função</label>
-                <input class="form-control" type="text" id="funcao" autocomplete="off" required>
+                <select class="form-select" id="funcao" aria-label="funcao select" required>
+                  <option selected>Selecione a função</option>
+
+                </select>
+
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O nome da função deve ser preenchido apenas com letras e deve conter mais de 4 letras.
                 </div>
@@ -215,16 +204,7 @@
                 <label class="form-label" for="setor">Setor</label>
                 <select class="form-select" id="setor" aria-label="setor select" required>
                   <option selected>Selecione o setor</option>
-                  <option value="1">Segtes</option>
-                  <option value="2">Sermac</option>
-                  <option value="3">Central de Regulação</option>
-                  <option value="4">Ouvidoria SUS</option>
-                  <option value="5">Sevs</option>
-                  <option value="6">Visa</option>
-                  <option value="7">Cerest</option>
-                  <option value="8">Samu</option>
-                  <option value="9">Imunização</option>
-                  <option value="9">Análise Laboratorial</option>
+
                 </select>
 
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -232,82 +212,29 @@
                 </div>
               </div>
             </div>
-            <div class="alert alert-danger d-none" role="alert">
-              Todos os campos do formulário devem ser preenchidos corretamente!
-            </div>
-            <div class="button-group">
-              <button type="reset" class="btn btn-danger btn-clear">Limpar</button>
-              <button type="button" class="btn btn-primary btn-next">Continuar</button>
-
-            </div>
-
-          </div>
-
-          <div class="page-2 container hidden">
-            <h1 class="text-center">Cadastro de Servidor</h1>
-            <h4 class="text-center">Todos os campos são obrigatórios</h4>
             <div class="row">
-              <div class="form-group col-sm-9">
+              <div class="form-group col-sm-4">
                 <label class="form-label" for="logradouro">Logradouro</label>
                 <input class="form-control" type="text" id="logradouro" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O nome do logradouro deve conter mais de 4 caracteres.
                 </div>
               </div>
-              <div class="form-group col-sm-3">
+              <div class="form-group col-sm-2">
                 <label class="form-label" for="numero">Numero</label>
                 <input class="form-control" type="number" id="numero" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   O numero do imóvel deve conter apenas caracteres numéricos.
                 </div>
               </div>
-            </div>
-
-            <div class="row">
               <div class="form-group col-sm-4">
-                <label class="form-label" for="cidade">Cidade</label>
-                <input class="form-control" type="text" id="cidade" required>
+                <label class="form-label" for="complemento">Complemento</label>
+                <input class="form-control" type="text" id="complemento">
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                  O nome da cidade deve conter apenas letras e deve conter mais de 2 letras.
+                  Informe um complemento válido!
                 </div>
               </div>
-              <div class="form-group col-sm-4">
-                <label class="form-label" for="estado">Estado</label>
-                <select class="form-select" id="estado" aria-label="setor select" required>
-                  <option selected>Selecione a UF</option>
-                  <option value="1">AC</option>
-                  <option value="2">AL</option>
-                  <option value="3">AP</option>
-                  <option value="4">AM</option>
-                  <option value="5">BA</option>
-                  <option value="6">CE</option>
-                  <option value="7">ES</option>
-                  <option value="8">GO</option>
-                  <option value="9">MA</option>
-                  <option value="10">MT</option>
-                  <option value="11">MS</option>
-                  <option value="12">MG</option>
-                  <option value="13">PA</option>
-                  <option value="14">PB</option>
-                  <option value="15">PR</option>
-                  <option value="16">PE</option>
-                  <option value="17">PI</option>
-                  <option value="18">RJ</option>
-                  <option value="19">RN</option>
-                  <option value="20">RS</option>
-                  <option value="21">RO</option>
-                  <option value="22">RR</option>
-                  <option value="23">SC</option>
-                  <option value="24">SP</option>
-                  <option value="25">SE</option>
-                  <option value="26">TO</option>
-                  <option value="27">DG</option>
-                </select>
-              </div>
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                O estado deve ser selecionado.
-              </div>
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-2">
                 <label class="form-label" for="cep">CEP</label>
                 <input class="form-control mascara-cep" type="text" id="cep" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -315,16 +242,22 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
-              <div class="form-group col-sm-6">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control" type="email" id="email" required>
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="emailses">Email SES</label>
+                <input class="form-control" type="email" id="emailses" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Informe um e-mail válido contendo apenas um caractere @
                 </div>
               </div>
-              <div class="form-group col-sm-6">
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" id="email">
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe um e-mail válido contendo apenas um caractere @
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
                 <label class="form-label" for="telefone">Telefone</label>
                 <input class="form-control mascara-telefone" type="tel" id="telefone" required>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -332,19 +265,16 @@
                 </div>
               </div>
             </div>
-            <div class="alert alert-danger d-none" id="alert2" role="alert">
+            <div class="alert alert-danger d-none" role="alert">
               Todos os campos do formulário devem ser preenchidos corretamente!
             </div>
             <div class="button-group">
+              <button type="button" class="btn btn-secondary btn-exit">Sair</button>
+              <button type="button" class="btn btn-primary btn-save">Salvar</button>
               <button type="button" class="btn btn-danger btn-clear">Limpar</button>
-              <button type="button" class="btn btn-secondary btn-back">Voltar</button>
-              <button type="button" class="btn btn-success btn-save">Salvar</button>
-
             </div>
-
           </div>
         </form>
-
       </div>
     </div>
   </div>
