@@ -89,8 +89,8 @@
           </div>
         </li>
         <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
-            <span><i class="fal fa-comment"></i>Messages</span>
-            <span class="bg-dark rounded-pill text-white py-0 px-2">02</span></a>
+            <span><i class="fal fa-comment"></i>Messagens</span>
+          </a>
         </li>
       </ul>
 
@@ -126,6 +126,8 @@
 
       <!-- MAIN CONTENT -->
       <div class="dashboard-content px-3 pt-4">
+
+        <!--DELETE ALERT MODAL-->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -144,13 +146,41 @@
             </div>
           </div>
         </div>
+
+        <!--SERVIDOR NOT FOUND MODAL-->
+
+        <div class="modal fade" id="servidorNotFoundModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Servidor não encontrado</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Servidor não encontrado
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--MAIN FORM-->
         <div class="container page-1">
           <a class="btn btn-primary" href="servidor-cadastrar.html" role="button">Novo servidor</a>
           <h1 class="text-center">Consultar Servidores</h1>
 
-          <form action="">
-
-          </form>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="buscar" placeholder="Matrícula do servidor"
+              aria-label="Matrícula do servidor" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="btn-buscar">Buscar</button>
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+              A matrícula deve ser preenchida apenas com números
+            </div>
+          </div>
           <table class="table table-light table-hover">
             <thead>
               <tr>
@@ -180,6 +210,7 @@
   <script src="js/maskedinput.js"></script>
   <script type="module" src="js/util.js"></script>
   <script type="module" src="js/servidor-consultar.js"></script>
+  <script type="module" src="js/servidor-buscar.js"></script>
 
 </body>
 

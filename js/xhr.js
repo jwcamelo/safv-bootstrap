@@ -23,13 +23,4 @@ export const sendHttpRequest = (method, url, data) => {
 
 }
 
-export const getData = (url) => {
-  sendHttpRequest('GET', url).then(responseData => {
 
-    return responseData
-  })
-}
-
-export const sendData = (method, url, data) => {
-  sendHttpRequest(method, url,).then(responseData => { console.log(responseData) }).catch(err => { console.log(err) });
-}
