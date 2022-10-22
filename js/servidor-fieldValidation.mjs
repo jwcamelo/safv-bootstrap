@@ -192,7 +192,7 @@ export function validaServidor() {
   dataNasc.addEventListener('keyup', validaCampoDataNasc);
   cpf.addEventListener('keyup', validaCampoCpf);
   matricula.addEventListener('keyup', validaCampoMatricula);
-  funcao.addEventListener('keyup', validaCampoFuncao);
+  funcao.addEventListener('change', validaCampoFuncao);
   setor.addEventListener('change', validaCampoSetor);
   logradouro.addEventListener('keyup', validaCampoLogradouro);
   numero.addEventListener('keyup', validaCampoNumero);
