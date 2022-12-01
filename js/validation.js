@@ -66,7 +66,7 @@ function validacaoCEP(strCEP) {
 // Validação de string vazia
 
 function validacaoVazia(inputtxt) {
-  return inputtxt.value.trim().length > 3 ? true : false;
+  return inputtxt.value.trim().length > 0 ? true : false;
 }
 
 // Validação de string com apenas letras
