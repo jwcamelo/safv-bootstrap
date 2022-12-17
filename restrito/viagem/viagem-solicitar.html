@@ -96,24 +96,18 @@
 
       <hr class="h-color mx-3">
       <ul class="list-unstyled px-2">
-        <li><a href="#" class="text-decoration=none px-3 py-2 d-block"><i class="fal fa-bars"></i>Settings</a></li>
-        <li><a href="#" class="text-decoration=none px-3 py-2 d-block"><i class="fal fa-bell"></i>Notifications</a></li>
+        <li><a href="#" class="text-decoration=none px-3 py-2 d-block"><i class="fal fa-bars"></i>Configurações</a></li>
+        <li><a href="#" class="text-decoration=none px-3 py-2 d-block"><i class="fal fa-bell"></i>Notificações</a></li>
       </ul>
     </div>
     <div class="content">
-      <nav class="navbar navbar-expand-md">
+      <nav class="navbar navbar-expand">
         <div class="container-fluid">
           <div class="d-flex justify-content-between d-md-none d-block">
 
             <button class="btn open-btn px-1 py-0"><i class="fal fa-bars"></i></button>
             <a class="navbar-brand" href="#">SAFV</a>
           </div>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
           <div class="profile-dropdown collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
               <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -136,6 +130,47 @@
 
       <!-- MAIN CONTENT -->
       <div class="dashboard-content px-3 pt-4">
+
+        <!--VEICULO NAO DISPONIVEL MODAL-->
+        <div class="modal fade" id="veiculoNotAvailable" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Veículo indisponível</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Infelizmente não existe veículo do tipo selecionado disponível na data desejada.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--SERVIDOR NOT FOUND MODAL-->
+
+        <div class="modal fade" id="servidorNotFoundModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Servidor não encontrado</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Servidor não encontrado
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!--ADD VEICULO MODAL-->
         <div class="modal fade" id="addVeiculoModal" tabindex="-1" aria-labelledby="addVeiculoModalLabel"
@@ -190,7 +225,11 @@
                     Informe a matrícula do servidor
                   </div>
                 </div>
+                <div id="servidor-indisponivel-alert" class="alert alert-danger  d-none" role="alert">
+                  O servidor selecionado não está disponível.
+                </div>
               </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-primary" id="btn-confirmAddServidor">Confirmar</button>
@@ -204,7 +243,7 @@
           <h3 class="text-center py-3">Detalhes da Viagem</h3>
           <h4 class="text-center">Todos os campos são obrigatórios</h4>
           <form class="needs-validation" id="form" novalidate>
-            <div class="page-1 container">
+            <div class="container">
 
               <div class="row">
                 <div class="form-group col-lg-6 col-md-12">
@@ -258,10 +297,12 @@
               <div class="table-container d-none">
                 <div class="table-header">
                   <span>Veículo</span>
-                  <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#addVeiculoModal"><i
-                      class="fal fa-plus"></i>Veículo</button>
+                  <button id="btn-add-veiculo" type="button" class="btn btn-link" data-bs-toggle="modal"
+                    data-bs-target="#addVeiculoModal"><i class="fal fa-plus"></i>Veículo</button>
+                  <button id="btn-excluir-veiculo" type="button" class="btn btn-link btn-link-excluir d-none"><i
+                      class="fal fa-trash"></i>Veículo</button>
                 </div>
-                <table id="tb-veiculo" class="table table-hover d-none">
+                <table id="tb-veiculo" class="table table-light table-hover d-none">
                   <thead>
                     <tr>
                       <th scope="col">Placa</th>
@@ -280,7 +321,7 @@
                   <button id="btn-addMotorista" type="button" class="btn btn-link" data-bs-toggle="modal"
                     data-bs-target="#addMotoristaModal"><i class="fal fa-plus"></i>Motorista</button>
                 </div>
-                <table id="tb-motorista" class="table table-hover d-none">
+                <table id="tb-motorista" class="table table-light table-hover d-none">
                   <thead>
                     <tr>
                       <th scope="col">Nome</th>
@@ -294,12 +335,14 @@
                   </tbody>
                 </table>
 
+              </div>
+              <div class="table-container-servidor d-none">
                 <div class="table-header">
                   <span>Servidores</span>
                   <button type="button" class="btn btn-link" data-bs-toggle="modal"
                     data-bs-target="#addServidorModal"><i class="fal fa-plus"></i>Servidor</button>
                 </div>
-                <table class="table table-hover d-none">
+                <table id="tb-servidor" class="table table-light table-hover d-none">
                   <thead>
                     <tr>
                       <th scope="col">Nome</th>
@@ -320,11 +363,11 @@
               </div>
               <div class="button-group">
                 <button type="button" class="btn btn-secondary btn-exit">Voltar</button>
-                <button type="button" class="btn btn-danger btn-delete">Excluir</button>
+                <button type="button" class="btn btn-primary btn-save">Solicitar viagem</button>
               </div>
             </div>
           </form>
-          <div class="alert alert-danger d-none" role="alert">
+          <div id="form-alert" class="alert alert-danger d-none" role="alert">
             Todos os campos do formulário devem ser preenchidos corretamente!
           </div>
         </div>

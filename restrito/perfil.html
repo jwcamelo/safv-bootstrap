@@ -27,7 +27,7 @@
       </div>
 
       <ul class="list-unstyled px-2">
-        <li class="active"><a href="index.html" class="text-decoration-none px-3 py-2 d-block"><i
+        <li class="active"><a href="./home.html" class="text-decoration-none px-3 py-2 d-block"><i
               class="fal fa-home"></i>Home</a></li>
         <li>
           <div class="dropdown">
@@ -37,9 +37,9 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="viagem-solicitar.html">Solicitar viagem</a></li>
-              <li><a class="dropdown-item" href="viagem-consultar.html">Consultar viagens</a></li>
-              <li><a class="dropdown-item" href="viagem-relatorio.html">Relatórios</a></li>
+              <li><a class="dropdown-item" href="viagem/viagem-solicitar.html">Solicitar viagem</a></li>
+              <li><a class="dropdown-item" href="viagem/viagem-consultar.html">Consultar viagens</a></li>
+              <li><a class="dropdown-item" href="viagem/viagem-relatorio.html">Relatórios</a></li>
             </ul>
           </div>
         </li>
@@ -100,19 +100,13 @@
       </ul>
     </div>
     <div class="content">
-      <nav class="navbar navbar-expand-md">
+      <nav class="navbar navbar-expand">
         <div class="container-fluid">
           <div class="d-flex justify-content-between d-md-none d-block">
 
             <button class="btn open-btn px-1 py-0"><i class="fal fa-bars"></i></button>
             <a class="navbar-brand" href="#">SAFV</a>
           </div>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
           <div class="profile-dropdown collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
               <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -130,159 +124,162 @@
           </div>
         </div>
       </nav>
-
-      <!-- Modal alteracao de senha-->
-      <div class="modal fade" id="alterarSenhaModal" tabindex="-1" aria-labelledby="alterarSenhaModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="alterarSenhaModalSenhaModalLabel">Alterar senha</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <h5>Preencha os campos corretamente para alterar a senha. Todos os campos são obrigatórios.</h5>
-              <form action="" autocomplete="off">
-                <div class="form-group">
-                  <label for="senhaAtual" class="form-label">Senha atual</label>
-                  <input type="password" id="senhaAtual" class="form-control" autocomplete="off"
-                    placeholder="Informe a senha atual...">
-                  <div id="validationSenhaAtualFeedback" class="invalid-feedback">
-                    Informe a senha atual.
+      <div class="dashboard-content px-3 pt-4">
+        <!-- Modal alteracao de senha-->
+        <div class="modal fade" id="alterarSenhaModal" tabindex="-1" aria-labelledby="alterarSenhaModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="alterarSenhaModalSenhaModalLabel">Alterar senha</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h5>Preencha os campos corretamente para alterar a senha. Todos os campos são obrigatórios.</h5>
+                <form action="" autocomplete="off">
+                  <div class="form-group">
+                    <label for="senhaAtual" class="form-label">Senha atual</label>
+                    <input type="password" id="senhaAtual" class="form-control" autocomplete="off"
+                      placeholder="Informe a senha atual...">
+                    <div id="validationSenhaAtualFeedback" class="invalid-feedback">
+                      Informe a senha atual.
+                    </div>
                   </div>
-                </div>
 
-                <div class="form-group">
-                  <label for="novaSenha" class="form-label">Nova senha</label>
-                  <input type="password" id="novaSenha" class="form-control" autocomplete="off"
-                    placeholder="Informe a nova senha ...">
-                  <div id="validationNovaSenhaFeedback" class="invalid-feedback">
-                    Informe a nova senha contendo de 5 a 16 digitos
+                  <div class="form-group">
+                    <label for="novaSenha" class="form-label">Nova senha</label>
+                    <input type="password" id="novaSenha" class="form-control" autocomplete="off"
+                      placeholder="Informe a nova senha ...">
+                    <div id="validationNovaSenhaFeedback" class="invalid-feedback">
+                      Informe a nova senha contendo de 5 a 16 digitos
+                    </div>
                   </div>
-                </div>
 
-                <div class="form-group">
-                  <label for="confirmNovaSenha" class="form-label">Confirmação da nova senha</label>
-                  <input type="password" id="confirmNovaSenha" class="form-control" autocomplete="off"
-                    placeholder="Insira a nova senha novamente...">
-                  <div id="validationConfirmNovaSenhaFeedback" class="invalid-feedback">
-                    A senha e a confirmação de senha devem ser iguais.
+                  <div class="form-group">
+                    <label for="confirmNovaSenha" class="form-label">Confirmação da nova senha</label>
+                    <input type="password" id="confirmNovaSenha" class="form-control" autocomplete="off"
+                      placeholder="Insira a nova senha novamente...">
+                    <div id="validationConfirmNovaSenhaFeedback" class="invalid-feedback">
+                      A senha e a confirmação de senha devem ser iguais.
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
-            <div class="alert alert-success senhaAlteradaAlert d-none" role="alert">
-              Senha alterada, Você será redirecionado para o login.
-            </div>
-            <div class="alert alert-danger senhaNaoAlteradaAlert d-none" role="alert">
-              Não foi possível alterar a senha. Tente novamente em alguns minutos.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary" id="enviarAlteracaoSenha">Alterar senha</button>
+                </form>
+              </div>
+              <div class="alert alert-success senhaAlteradaAlert d-none" role="alert">
+                Senha alterada, Você será redirecionado para o login.
+              </div>
+              <div class="alert alert-danger senhaNaoAlteradaAlert d-none" role="alert">
+                Não foi possível alterar a senha. Tente novamente em alguns minutos.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="enviarAlteracaoSenha">Alterar senha</button>
+              </div>
             </div>
           </div>
+        </div>
+
+        <!--Main Content-->
+        <div class="container page-1">
+          <form class="needs-validation" id="form" novalidate>
+            <h1 class="text-center">Meu perfil</h1>
+            <h4 class="text-center">**Apenas leitura**</h4>
+            <div class="row">
+              <div class="form-group col-lg-4 col-md-6">
+                <label class="form-label" for="nome">Nome</label>
+                <input class="form-control" type="text" id="nome" autocomplete="off" disabled readonly>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O nome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
+                </div>
+              </div>
+              <div class="form-group col-lg-4 col-md-6">
+                <label class="form-label" for="Sobrenome">Sobrenome</label>
+                <input class="form-control" type="text" id="sobrenome" autocomplete="off" disabled readonly>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  O Sobrenome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
+                </div>
+              </div>
+              <div class="form-group col-lg-2 col-md-6">
+                <label class="form-label" for="dataNascimento">Data de nasc.</label>
+                <input class="form-control mascara-data" type="text" id="dataNascimento" autocomplete="off" disabled
+                  readonly>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe a Data de Nascimento no formato dd/MM/yyyy
+                </div>
+              </div>
+              <div class="form-group col-lg-2 col-md-6">
+                <label class="form-label" for="cpf">CPF</label>
+                <input class="form-control mascara-cpf" type="text" id="cpf" autocomplete="off" disabled readonly>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  Informe um número de CPF válido!
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-lg-6 col-sm-9">
+                <label class="form-label" for="logradouro">Logradouro</label>
+                <input class="form-control" type="text" id="logradouro" disabled readonly>
+              </div>
+              <div class="form-group col-lg-6 col-sm-3">
+                <label class="form-label" for="numero">Numero</label>
+                <input class="form-control" type="number" id="numero" disabled readonly>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-4 col-sm-4">
+                <label class="form-label" for="complemento">Complemento</label>
+                <input class="form-control" type="text" id="complemento" disabled readonly>
+              </div>
+              <div class="form-group col-lg-4 col-sm-4">
+                <label class="form-label" for="cep">CEP</label>
+                <input class="form-control mascara-cep" type="text" id="cep" disabled readonly>
+              </div>
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" id="email" disabled readonly>
+              </div>
+            </div>
+            <div class="row" id="campos-servidor">
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="matricula">Matrícula</label>
+                <input class="form-control" type="text" id="matricula" autocomplete="off" disabled readonly>
+              </div>
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="funcao">Função</label>
+                <input class="form-control" id="funcao" aria-label="funcao" disabled readonly>
+                </input>
+              </div>
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="setor">Setor</label>
+                <input class="form-control" id="setor" aria-label="setor" disabled readonly>
+                </input>
+              </div>
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="emailses">Email SES</label>
+                <input class="form-control" type="email" id="emailses" disabled readonly>
+              </div>
+            </div>
+            <div class="row" id="campos-motorista">
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="cnh">CNH</label>
+                <input class="form-control" type="text" id="cnh" autocomplete="off" disabled readonly>
+              </div>
+              <div class="form-group col-sm-4">
+                <label class="form-label" for="categoria">Categoria</label>
+                <input class="form-control" id="categoria" disabled readonly>
+                </input>
+              </div>
+            </div>
+            <div class="button-group">
+              <button type="button" class="btn btn-secondary btn-exit">Sair</button>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#alterarSenhaModal">
+                Alterar senha
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-
-      <!--Main Content-->
-      <form class="needs-validation" id="form" novalidate>
-        <div class="page-1 container">
-          <h1 class="text-center">Meu perfil</h1>
-          <h4 class="text-center">**Apenas leitura**</h4>
-          <div class="row">
-            <div class="form-group col-lg-4 col-md-6">
-              <label class="form-label" for="nome">Nome</label>
-              <input class="form-control" type="text" id="nome" autocomplete="off" disabled readonly>
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                O nome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
-              </div>
-            </div>
-            <div class="form-group col-lg-4 col-md-6">
-              <label class="form-label" for="Sobrenome">Sobrenome</label>
-              <input class="form-control" type="text" id="sobrenome" autocomplete="off" disabled readonly>
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                O Sobrenome deve ser preenchido apenas com letras e deve conter mais de 4 letras.
-              </div>
-            </div>
-            <div class="form-group col-lg-2 col-md-6">
-              <label class="form-label" for="dataNascimento">Data de nascimento</label>
-              <input class="form-control mascara-data" type="text" id="dataNascimento" autocomplete="off" disabled
-                readonly>
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                Informe a Data de Nascimento no formato dd/MM/yyyy
-              </div>
-            </div>
-            <div class="form-group col-lg-2 col-md-6">
-              <label class="form-label" for="cpf">CPF</label>
-              <input class="form-control mascara-cpf" type="text" id="cpf" autocomplete="off" disabled readonly>
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                Informe um número de CPF válido!
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-lg-4 col-sm-9">
-              <label class="form-label" for="logradouro">Logradouro</label>
-              <input class="form-control" type="text" id="logradouro" disabled readonly>
-            </div>
-            <div class="form-group col-lg-2 col-sm-3">
-              <label class="form-label" for="numero">Numero</label>
-              <input class="form-control" type="number" id="numero" disabled readonly>
-            </div>
-            <div class="form-group col-lg-4 col-sm-4">
-              <label class="form-label" for="complemento">Complemento</label>
-              <input class="form-control" type="text" id="complemento" disabled readonly>
-            </div>
-            <div class="form-group col-lg-2 col-sm-4">
-              <label class="form-label" for="cep">CEP</label>
-              <input class="form-control mascara-cep" type="text" id="cep" disabled readonly>
-            </div>
-            <div class="form-group col-sm-4">
-              <label class="form-label" for="email">Email</label>
-              <input class="form-control" type="email" id="email" disabled readonly>
-            </div>
-          </div>
-          <div class="row" id="campos-servidor">
-            <div class="form-group col-sm-4">
-              <label class="form-label" for="matricula">Matrícula</label>
-              <input class="form-control" type="text" id="matricula" autocomplete="off" disabled readonly>
-            </div>
-            <div class="form-group col-sm-4">
-              <label class="form-label" for="funcao">Função</label>
-              <input class="form-control" id="funcao" aria-label="funcao" disabled readonly>
-              </input>
-            </div>
-            <div class="form-group col-sm-4">
-              <label class="form-label" for="setor">Setor</label>
-              <input class="form-control" id="setor" aria-label="setor" disabled readonly>
-              </input>
-            </div>
-            <div class="form-group col-sm-4">
-              <label class="form-label" for="emailses">Email SES</label>
-              <input class="form-control" type="email" id="emailses" disabled readonly>
-            </div>
-          </div>
-          <div class="row" id="campos-motorista">
-            <div class="form-group col-sm-4">
-              <label class="form-label" for="cnh">CNH</label>
-              <input class="form-control" type="text" id="cnh" autocomplete="off" disabled readonly>
-            </div>
-            <div class="form-group col-sm-4">
-              <label class="form-label" for="categoria">Categoria</label>
-              <input class="form-control" id="categoria" disabled readonly>
-              </input>
-            </div>
-          </div>
-          <div class="button-group">
-            <button type="button" class="btn btn-secondary btn-exit">Sair</button>
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#alterarSenhaModal">
-              Alterar senha
-            </button>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 

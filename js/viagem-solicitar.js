@@ -1,20 +1,17 @@
 import { sendHttpRequest } from "./xhr.js";
-
-// sendHttpRequest('get', "https://safv-api-production.up.railway.app/setor/1").then(
-//   data => console.log(data)
-// )
-
+import { validaCampoMatricula } from "./validation.js";
 import { campos, validaViagem } from "./viagem-fieldValidation.mjs";
+
 let tbodyMotoristas = document.querySelector(".tbody-motoristas");
 let tbodyServidores = document.querySelector(".tbody-servidores");
 let tbodyVeiculos = document.querySelector(".tbody-veiculos");
 let tipo = document.querySelector('#tipo');
-let addVeiculo = document.querySelector('#btn-confirmAddVeiculo');
 let viagemsNaDataSelecionada = []
 let veiculosDoTipoSelecionado = []
 let veiculosDisponiveis = []
 let motoristasDaCategoriaSelecionada = []
 let motoristasDisponiveis = []
+let servidoresDisponiveis = []
 
 validaViagem();
 
@@ -40,17 +37,11 @@ function adicionarVeiculo() {
             .then(data => {
               console.log(data)
               veiculosDoTipoSelecionado = data
-              console.log("veiculos do tipo selecionado req ")
-              for (let veiculo of veiculosDoTipoSelecionado) {
-                console.log(veiculo.placa)
-              }
 
               // VERIFICA EXISTEM ENTIDADES COMPATÍVES DISPONÍVEIS NO DIA DA VIAGEM
               for (let veiculoDisponivel of veiculosDoTipoSelecionado) {
                 for (let viagem of viagemsNaDataSelecionada) {
-                  console.log("id viagem " + viagem.id);
                   for (let veiculo of viagem.veiculos) {
-                    console.log("placa veiculos " + veiculo.placa)
                     if (veiculoDisponivel.placa == veiculo.placa) {
                       const index = veiculosDoTipoSelecionado.indexOf(veiculoDisponivel);
                       veiculosDoTipoSelecionado.splice(index, 1);
@@ -59,19 +50,15 @@ function adicionarVeiculo() {
                 }
               }
 
-              console.log("veiculos do tipo selecionado filtro ")
-              for (let veiculo of veiculosDoTipoSelecionado) {
-                console.log(veiculo.placa)
-              }
-
-
-              console.log("veiculos filtrados")
+              // VERIFICA SE EXISTEM VEICULOS DISPONIVES
               if (veiculosDoTipoSelecionado.length > 0) {
                 veiculosDisponiveis.push(veiculosDoTipoSelecionado[0])
-                console.log("veiculos disponivels placa ");
-                for (let veiculo of veiculosDisponiveis) console.log(veiculo.placa)
               } else {
-                alert("Não há veículo disponível para esta data")
+                $('#addVeiculoModal').modal('hide');
+                $('#veiculoNotAvailable').modal('show');
+                setTimeout(() => {
+                  $('#veiculoNotAvailable').modal('hide');
+                }, 5000)
               }
             }).then(data => {
               console.log(data);
@@ -80,18 +67,11 @@ function adicionarVeiculo() {
                 .then(data => {
                   motoristasDaCategoriaSelecionada = data
 
-                  console.log("motoristas do tipo selecionado req ")
-                  for (let motorista of motoristasDaCategoriaSelecionada) {
-                    console.log(motorista.cnh)
-                  }
-
                   //VERIFICA SE EXISTEM MOTORISTAS DISPONIVEIS PARA ESTA DATA
                   // VERIFICA EXISTEM ENTIDADES COMPATÍVES DISPONÍVEIS NO DIA DA VIAGEM
                   for (let motoristaDisponivel of motoristasDaCategoriaSelecionada) {
                     for (let viagem of viagemsNaDataSelecionada) {
-                      console.log("id viagem " + viagem.id);
                       for (let motorista of viagem.motoristas) {
-                        console.log("cnh motoristas " + motorista.cnh)
                         if (motoristaDisponivel.cnh == motorista.cnh) {
                           const index = motoristasDaCategoriaSelecionada.indexOf(motoristaDisponivel);
                           motoristasDaCategoriaSelecionada.splice(index, 1);
@@ -100,15 +80,10 @@ function adicionarVeiculo() {
                     }
                   }
 
-                  console.log("motoristas do tipo selecionado filtro ")
-                  for (let motorista of motoristasDaCategoriaSelecionada) {
-                    console.log(motorista.cnh)
-                  }
-
+                  //VERIFICA SE EXISTEM MOTORISTAS DISPONIVEIS
                   if (motoristasDaCategoriaSelecionada.length > 0) {
                     motoristasDisponiveis.push(motoristasDaCategoriaSelecionada[0])
-                    console.log("veiculos disponivels placa ");
-                    for (let veiculo of veiculosDisponiveis) console.log(veiculo.placa)
+
                   } else {
                     alert("Não há motorista disponível para esta data")
                   }
@@ -144,8 +119,10 @@ function adicionarVeiculo() {
 
                     document.querySelector('#tb-veiculo').classList.remove('d-none');
                     document.querySelector('#tb-motorista').classList.remove('d-none');
-                  } else {
-                    "algo de errado nao esta certo"
+                    $('#addVeiculoModal').modal('hide');
+                    document.querySelector('#btn-add-veiculo').classList.add('d-none');
+                    document.querySelector('#btn-excluir-veiculo').classList.remove('d-none');
+                    document.querySelector('.table-container-servidor').classList.remove('d-none');
                   }
 
                 })
@@ -159,8 +136,108 @@ function adicionarVeiculo() {
   }
 }
 
+function adicionarServidor() {
+  if (validaViagem() && validaCampoMatricula()) {
+    let matricula = document.querySelector('#matricula').value;
+    let matriculasComViagem = []
+    for (let viagem of viagemsNaDataSelecionada) {
+      for (let servidor of viagem.servidores) {
+        matriculasComViagem.push(servidor.matricula);
+      }
+    }
+    if (matriculasComViagem.includes(matricula)) {
+      document.querySelector('#servidor-indisponivel-alert').classList.remove('d-none');
+    } else {
+      document.querySelector('#servidor-indisponivel-alert').classList.add('d-none');
+      sendHttpRequest('get', `https://safv-api-production.up.railway.app/servidor/${matricula}`)
+        .then(data => {
+          console.log(data)
+          if (data) {
+            servidoresDisponiveis.push(data);
+            $('#addServidorModal').modal('hide');
+
+
+            tbodyServidores.innerHTML = ""
+
+            for (let servidor of servidoresDisponiveis) {
+              tbodyServidores.innerHTML += `
+              <tr>
+                  <td>${servidor.nome}</td>
+                  <td>${servidor.sobrenome}</td>
+                  <td class="visible-md-block">${servidor.matricula}</td>
+                  <td class="visible-md-block">${servidor.funcao.nome}</td>
+                  
+              </tr>
+              
+              `
+            }
+
+            document.querySelector('#tb-servidor').classList.remove('d-none');
+
+
+          }
+          else {
+            $('#addServidorModal').modal('hide')
+            $('#servidorNotFoundModal').modal('show')
+          }
+        })
+    }
+  }
+}
+
+function solicitarViagem() {
+  if (validaViagem() && servidoresDisponiveis.length > 0 && veiculosDisponiveis.length > 0
+    && motoristasDisponiveis.length > 0) {
+    console.log(veiculosDisponiveis)
+    console.log(motoristasDisponiveis)
+    console.log(servidoresDisponiveis)
+    let placaVeiculos = []
+    let cnhMotoristas = []
+    let matriculaServidores = []
+    for (let veiculo of veiculosDisponiveis) {
+      placaVeiculos.push(veiculo.placa)
+    }
+    for (let motorista of motoristasDisponiveis) {
+      cnhMotoristas.push(motorista.cnh)
+    }
+    for (let servidor of servidoresDisponiveis) {
+      matriculaServidores.push(servidor.matricula)
+    }
+
+
+    document.querySelector('#servidor-indisponivel-alert').classList.add('d-none');
+    sendHttpRequest('post', `https://safv-api-production.up.railway.app/viagem`, {
+      data: campos.data.value,
+      hora: campos.hora.value,
+      localPartida: campos.localPartida.value,
+      localDestino: campos.localDestino.value,
+      placaVeiculos: placaVeiculos,
+      cnhMotoristas: cnhMotoristas,
+      matriculaServidores: matriculaServidores
+    }).then(data => {
+      console.log(data)
+      setTimeout(() => {
+        window.location.href = `../viagem/viagem-consultar.html`
+      }, "2000")
+    })
+
+  } else {
+    document.querySelector('#form-alert').classList.remove('d-none')
+  }
+
+
+}
+
+
 
 window.document.addEventListener("click", showTable)
+document.querySelector('#btn-confirmAddVeiculo').addEventListener("click", adicionarVeiculo);
+document.querySelector('#matricula').addEventListener("keyup", validaCampoMatricula);
+document.querySelector('#btn-confirmAddServidor').addEventListener("click", adicionarServidor);
+document.querySelector('.btn-save').addEventListener('click', solicitarViagem)
+document.querySelector('.btn-exit').addEventListener("click", function () {
+  window.location.href = `../viagem/viagem-consultar.html`
+})
 
-addVeiculo.addEventListener("click", adicionarVeiculo);
+
 

@@ -109,4 +109,16 @@ function validacaoDataViagem(value) {
   return !((data[1] == 2 || data[1] == 4 || data[1] == 6 || data[1] == 9 || data[1] == 11) && data[0] > 30);
 }
 
-export { validacaoDataViagem, validacaoHora, validacaoApenasLetras, validacaoApenasNumeros, validacaoCEP, validacaoCPF, validacaoEmail, validacaoVazia, validacaoData }
+function validaCampoMatricula() {
+  if (validacaoApenasNumeros(matricula.value)) {
+    matricula.classList.remove('is-invalid');
+    matricula.classList.add('is-valid');
+    return true;
+  } else {
+    matricula.classList.remove('is-valid');
+    matricula.classList.add('is-invalid');
+    return false;
+  }
+}
+
+export { validaCampoMatricula, validacaoDataViagem, validacaoHora, validacaoApenasLetras, validacaoApenasNumeros, validacaoCEP, validacaoCPF, validacaoEmail, validacaoVazia, validacaoData }

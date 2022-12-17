@@ -410,5 +410,31 @@ app.delete('/viagem', (req, res) => {
 })
 
 
+// SOLICITAR VIAGEM
+app.post('/viagem', (req, res) => {
+
+  const {
+    data, hora, localPartida, localDestino,
+    placaVeiculos, matriculaServidores, cnhMotoristas
+  } = req.body;
+
+
+  // Request API create viagem
+  axios.post(`https://safv-api-production.up.railway.app/viagem`, {
+    data, hora, localPartida, localDestino,
+    placaVeiculos, matriculaServidores, cnhMotoristas
+  })
+    .then(function (response) {
+      console.log(response.data)
+      res.send(response.status)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log("error= " + error);
+      res.send(response.status)
+    })
+
+})
+
 
 

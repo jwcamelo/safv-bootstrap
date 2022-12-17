@@ -1,7 +1,7 @@
 .table-header {
   display: flex;
   justify-content: space-between;
-  background-color: rgba(240, 255, 255, 0.774);
+  background-color: #9a9fa469;
   padding: 0 150px;
   margin-top: 20px;
 }
@@ -13,4 +13,16 @@
 
 #btn-addMotorista {
   visibility: hidden;
+}
+
+.btn-link-excluir {
+  color: red;
+}
+
+.btn-link-excluir:hover {
+  color: red;
+}
+
+#servidor-indisponivel-alert {
+  margin-top: 10px;
 }

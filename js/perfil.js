@@ -121,4 +121,8 @@ btnAlterarSenha.addEventListener("click", () => {
 
 })
 
+document.querySelector('.btn-exit').addEventListener("click", function () {
+  location.href = './home.html'
+})
+
 

@@ -9,7 +9,7 @@
 
 .button-group {
   display: flex;
-  width: min-content;
+  width: max-content;
   margin: 0 auto;
   justify-content: space-around;
 }
@@ -28,8 +28,7 @@ form .form-group {
   display: none;
 }
 
-.page-1,
-.page-2 {
+.page-1 {
   height: min-content;
   padding: 20px;
   border-radius: 12px;
@@ -40,8 +39,6 @@ form .form-group {
   border: none;
   display: flex;
 }
-
-
 
 table {
   margin-top: 20px;
