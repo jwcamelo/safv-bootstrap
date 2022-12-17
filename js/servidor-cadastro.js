@@ -1,25 +1,35 @@
 
 import { limparCampos } from './util.js'
 import { campos, validaServidor } from "./servidor-fieldValidation.mjs";
-import { sendHttpRequest } from "./xhr.js";
+
 
 //Preenchimento dropdown
+function preencherFuncao() {
+  fetch("/funcao").then((res) => {
+    res.json().then(funcoes => {
+      funcoes.map(funcao => {
+        campos.funcao.innerHTML += `
+     <option value="${funcao.id}">${funcao.nome}</option>
+   `
+      })
+    })
+  })
+}
 
-const urlSetores = "https://safvroma.herokuapp.com/setor";
-const urlFuncoes = "https://safvroma.herokuapp.com/funcao";
+function preencherSetor() {
+  fetch("/setor").then((res) => {
+    res.json().then(setores => {
+      setores.map(setor => {
+        campos.setor.innerHTML += `
+       <option value="${setor.id}">${setor.nome}</option>
+     `
+      })
+    })
+  })
+}
 
-sendHttpRequest('GET', urlSetores).then(setores => setores.map(setor => {
-  campos.setor.innerHTML += `
-    <option value="${setor.id}">${setor.nome}</option>
-  `
-}))
-
-sendHttpRequest('GET', urlFuncoes).then(funcoes => funcoes.map(funcao => {
-  campos.funcao.innerHTML += `
-    <option value="${funcao.id}">${funcao.nome}</option>
-  `
-}))
-
+preencherFuncao();
+preencherSetor();
 validaServidor()
 
 //Ações
@@ -36,12 +46,12 @@ for (let button of limpar) {
 //Sair
 const sair = document.querySelector('.btn-exit');
 sair.addEventListener('click', function () {
-  window.location.href = `../servidor-consultar.html`
+  window.location.href = `../servidor/servidor-consultar.html`
 });
 
 //Salvar
-let salvar = document.querySelector('.btn-save');
-salvar.addEventListener('click', function (e) {
+let btnSalvar = document.querySelector('.btn-save');
+btnSalvar.addEventListener('click', function (e) {
   if (!validaServidor()) {
     e.preventDefault();
     $('#saveModal').modal({ show: false });
@@ -53,34 +63,43 @@ salvar.addEventListener('click', function (e) {
   }
 });
 
-const salvarServidor = () => {
-  sendHttpRequest('POST', `https://safvroma.herokuapp.com/funcionario/`, {
 
-    matricula: campos.matricula.value,
-    funcao: { id: parseInt(campos.funcao.value) },
-    setor: { id: parseInt(campos.setor.value) },
-    nome: campos.nome.value,
-    sobrenome: campos.sobrenome.value,
-    cpf: campos.cpf.value.replaceAll(".", "").replace("-", ""),
-    dataDeNascimento: campos.dataNasc.value,
-    logradouro: campos.logradouro.value,
-    numero: parseInt(campos.numero.value),
-    cep: parseInt(campos.cep.value.replace('.', "").replace('-', "")),
-    complemento: campos.complemento.value,
-    emailCorporativo: campos.emailses.value,
-    emailParticular: campos.email.value,
-    telefone: campos.telefone.value.replace(")", "").replace("(", "").replace("-", "")
+function salvar() {
+  fetch("/servidor", {
+    method: 'POST',
+    body: JSON.stringify({
+      matricula: campos.matricula.value,
+      idFuncao: parseInt(campos.funcao.value),
+      idSetor: parseInt(campos.setor.value),
+      nome: campos.nome.value,
+      sobrenome: campos.sobrenome.value,
+      cpf: campos.cpf.value.replaceAll(".", "").replace("-", ""),
+      dataDeNascimento: campos.dataNasc.value,
+      logradouro: campos.logradouro.value,
+      numero: parseInt(campos.numero.value),
+      cep: parseInt(campos.cep.value.replace('.', "").replace('-', "")),
+      complemento: campos.complemento.value,
+      emailSes: campos.emailses.value,
+      email: campos.email.value,
+      sexo: campos.sexo.value
 
-  }).then(console.log("dados salvos")).catch(err => { console.log(err) });
-
-  setTimeout(() => {
-    window.location.href = `../servidor-consultar.html`
-  }, "2000")
+    }),
+    headers: { "content-type": "application/json" }
+  }).then(async (resp) => {
+    const status = await resp.status;
+    console.log(status);
+    if (status == 201) {
+      setTimeout(() => {
+        window.location.href = `../servidor/servidor-consultar.html`
+      }, "2000")
+    } else {
+      alert('não foi possível salvar')
+    }
+  })
 }
 
-
 const confirmSalvar = document.querySelector('#btn-saveChanges');
-confirmSalvar.addEventListener('click', salvarServidor);
+confirmSalvar.addEventListener('click', salvar);
 
 
 

@@ -1,0 +1,75 @@
+body {
+  background-image: url('../img/bg3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.card-header {
+  background: #ffff;
+}
+
+.alert-incorrect-pwd {
+  display: block;
+  color: red;
+}
+
+.main-container {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.card form {
+  text-align: center;
+  padding: 5px;
+
+}
+
+form label {
+  text-align: left;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 7px;
+}
+
+img {
+  margin: 10px auto;
+  width: 200px;
+  align-self: center;
+}
+
+.radio-field {
+  display: flex;
+  justify-content: space-between;
+  max-width: 250px;
+  margin: 5px auto;
+
+}
+
+.radio-field label {
+  width: min-content;
+  margin-right: 5px;
+}
+
+#recuperarSenha {
+  color: rgb(0, 81, 255);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+section {
+  text-align: center;
+  padding: 10px;
+  border-radius: 12px;
+  background: #ffff;
+  width: 400px;
+}

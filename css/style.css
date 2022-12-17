@@ -23,6 +23,13 @@ button {
   border: none;
 }
 
+.dropdown-menu {
+  min-width: min-content
+}
+
+.usuarioLogadoMenu li a {
+  color: red;
+}
 
 hr.h-color {
   color: #eee;
@@ -41,12 +48,17 @@ i {
 }
 
 form h4 {
-  margin-bottom: 30px;
+  margin: 10px auto;
   font-size: 20px;
 }
 
 .navbar {
   background: #cad2e5;
+}
+
+#navImg {
+  margin-top: 15px;
+  width: 160px;
 }
 
 .sidebar li.active {

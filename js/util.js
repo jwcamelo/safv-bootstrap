@@ -7,6 +7,7 @@ jQuery(function ($) {
   $(".mascara-telefone").mask("(99)9999-9999?9");
   $(".mascara-cep").mask("99.999-999");
   $(".mascara-rg").mask("9.999.999");
+  $(".mascara-hora").mask("99:99");
 
 
 

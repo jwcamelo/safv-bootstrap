@@ -1,0 +1,16 @@
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(240, 255, 255, 0.774);
+  padding: 0 150px;
+  margin-top: 20px;
+}
+
+.table-header span {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#btn-addMotorista {
+  visibility: hidden;
+}

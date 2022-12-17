@@ -1,6 +1,4 @@
-import { sendHttpRequest } from "./xhr.js";
 import { validacaoApenasNumeros } from "./validation.js";
-
 
 const btnBuscar = document.querySelector('#btn-buscar');
 const buscar = document.querySelector('#buscar');
@@ -22,16 +20,17 @@ buscar.addEventListener('keyup', validaCampoCNH)
 function getByCNH() {
   if (validaCampoCNH()) {
     const cnhSelecionada = buscar.value;
-    sendHttpRequest('GET', `https://safvroma.herokuapp.com/motorista?cnh=${cnhSelecionada}`)
-      .then(response => {
-        if (response.length > 0) {
-          console.log(response);
-          window.location.href = `../motorista-editar.html?${cnhSelecionada}`
-        } else {
-          $('#motoristaNotFoundModal').modal('show');
-        }
-      }).catch(err => console.log(err));
+    let motoristas = JSON.parse(sessionStorage.getItem("motoristas"));
+
+    for (let motorista of motoristas) {
+      if (motorista.cnh == cnhSelecionada) {
+        window.location.href = `../motorista/motorista-editar.html?${cnhSelecionada}`
+      } else {
+        $('#motoristaNotFoundModal').modal('show');
+
+      }
+    }
   }
 }
 
-btnBuscar.addEventListener('click', getByCNH)
+btnBuscar.addEventListener('click', getByCNH);

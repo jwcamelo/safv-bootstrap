@@ -14,9 +14,10 @@ const complemento = document.querySelector('#complemento');
 const cnh = document.querySelector('#cnh');
 const email = document.querySelector('#email');
 const categoria = document.querySelector('#categoria');
+const sexo = document.querySelector('#sexo');
 
-export function validaMotorista() { 
-  function validaCampoNome() { 
+export function validaMotorista() {
+  function validaCampoNome() {
     if (validacaoApenasLetras(nome) && nome.value.length > 3) {
       nome.classList.remove('is-invalid');
       nome.classList.add('is-valid');
@@ -24,6 +25,19 @@ export function validaMotorista() {
     } else {
       nome.classList.remove('is-valid');
       nome.classList.add('is-invalid');
+      return false;
+    }
+  }
+
+  function validaCampoSexo() {
+    if (sexo.selectedIndex > 0) {
+
+      sexo.classList.remove('is-invalid');
+      sexo.classList.add('is-valid');
+      return true;
+    } else {
+      sexo.classList.remove('is-valid');
+      sexo.classList.add('is-invalid');
       return false;
     }
   }
@@ -64,12 +78,12 @@ export function validaMotorista() {
     }
   }
 
-  function validaCampoCategoria(){
-    if(validacaoApenasLetras(categoria) && categoria.value.length < 3){
+  function validaCampoCategoria() {
+    if (categoria.selectedIndex > 0) {
       categoria.classList.remove('is-invalid');
       categoria.classList.add('is-valid');
       return true;
-     } else {
+    } else {
       categoria.classList.remove('is-valid');
       categoria.classList.add('is-invalid');
       return false;
@@ -153,18 +167,19 @@ export function validaMotorista() {
   dataNasc.addEventListener('keyup', validaCampoDataNasc);
   cpf.addEventListener('keyup', validaCampoCpf);
   cnh.addEventListener('keyup', validaCampoCnh);
-  categoria.addEventListener('keyup', validaCampoCategoria);
+  categoria.addEventListener('change', validaCampoCategoria);
   logradouro.addEventListener('keyup', validaCampoLogradouro);
   numero.addEventListener('keyup', validaCampoNumero);
   cep.addEventListener('keyup', validaCampoCEP);
   complemento.addEventListener('keyup', validaCampoComplemento)
   email.addEventListener('keyup', validaCampoEmail);
- 
-  return (validaCampoNome() && validaCampoSobrenome() && validaCampoDataNasc() && validaCampoCpf()
+  sexo.addEventListener('change', validaCampoSexo)
+
+  return (validaCampoNome() && validaCampoSobrenome() && validaCampoSexo() && validaCampoDataNasc() && validaCampoCpf()
     && validaCampoCnh() && validaCampoCategoria() && validaCampoEmail() && validaCampoLogradouro()
-    && validaCampoNumero() && validaCampoComplemento() && validaCampoCEP() );
+    && validaCampoNumero() && validaCampoComplemento() && validaCampoCEP());
 }
 
 export const campos = {
-  nome, sobrenome, dataNasc, cpf, cnh, categoria, logradouro, numero, complemento, cep, email
+  nome, sobrenome, sexo, dataNasc, cpf, cnh, categoria, logradouro, numero, complemento, cep, email,
 }

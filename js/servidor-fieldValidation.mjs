@@ -16,7 +16,7 @@ const funcao = document.querySelector('#funcao');
 const setor = document.querySelector('#setor');
 const emailses = document.querySelector('#emailses');
 const email = document.querySelector('#email');
-const telefone = document.querySelector('#telefone');
+const sexo = document.querySelector('#sexo');
 
 export function validaServidor() {
   function validaCampoNome() {
@@ -55,6 +55,19 @@ export function validaServidor() {
     }
   }
 
+  function validaCampoSexo() {
+    if (sexo.selectedIndex > 0) {
+
+      sexo.classList.remove('is-invalid');
+      sexo.classList.add('is-valid');
+      return true;
+    } else {
+      sexo.classList.remove('is-valid');
+      sexo.classList.add('is-invalid');
+      return false;
+    }
+  }
+
   function validaCampoDataNasc() {
     if (validacaoData(dataNasc.value)) {
       dataNasc.classList.remove('is-invalid');
@@ -80,7 +93,8 @@ export function validaServidor() {
   }
 
   function validaCampoFuncao() {
-    if (funcao.options[funcao.selectedIndex].value > 0) {
+    if (funcao.selectedIndex > 0) {
+
       funcao.classList.remove('is-invalid');
       funcao.classList.add('is-valid');
       return true;
@@ -91,8 +105,10 @@ export function validaServidor() {
     }
   }
 
+
   function validaCampoSetor() {
-    if (setor.options[setor.selectedIndex].value > 0) {
+    if (setor.selectedIndex > 0) {
+
       setor.classList.remove('is-invalid');
       setor.classList.add('is-valid');
       return true;
@@ -151,18 +167,6 @@ export function validaServidor() {
     }
   }
 
-  function validaCampoTelefone() {
-    if (validacaoApenasNumeros(telefone.value.replace(/[()-]/g, '')) && telefone.value.replace(/[()-]/g, '').length == 11) {
-      telefone.classList.remove('is-invalid');
-      telefone.classList.add('is-valid');
-      return true;
-    } else {
-      telefone.classList.remove('is-valid');
-      telefone.classList.add('is-invalid');
-      return false;
-    }
-  }
-
   function validaCampoEmail() {
     if (validacaoEmail(email.value)) {
       email.classList.remove('is-invalid');
@@ -198,18 +202,18 @@ export function validaServidor() {
   numero.addEventListener('keyup', validaCampoNumero);
   cep.addEventListener('keyup', validaCampoCEP);
   complemento.addEventListener('keyup', validaCampoComplemento)
-  telefone.addEventListener('keyup', validaCampoTelefone);
+  sexo.addEventListener('change', validaCampoSexo);
   email.addEventListener('keyup', validaCampoEmail);
   emailses.addEventListener('keyup', validaCampoEmailSES);
 
-  return (validaCampoNome() && validaCampoSobrenome() && validaCampoDataNasc() && validaCampoCpf()
+  return (validaCampoNome() && validaCampoSobrenome() && validaCampoDataNasc() && validaCampoCpf() && validaCampoSexo()
     && validaCampoMatricula() && validaCampoFuncao() && validaCampoSetor() && validaCampoLogradouro()
     && validaCampoNumero() && validaCampoComplemento() && validaCampoCEP() && validaCampoEmailSES()
-    && validaCampoEmail() && validaCampoTelefone());
+    && validaCampoEmail());
 }
 
 
 export const campos = {
   nome, sobrenome, dataNasc, cpf, matricula, funcao, setor,
-  logradouro, numero, complemento, cep, emailses, email, telefone
+  logradouro, numero, complemento, cep, emailses, email, sexo
 }

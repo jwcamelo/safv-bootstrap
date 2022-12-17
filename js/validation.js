@@ -62,6 +62,11 @@ function validacaoCEP(strCEP) {
   return false;
 }
 
+function validacaoHora(strHr) {
+  let objER = /^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/;
+  if (objER.test(strHr)) return true;
+  return false;
+}
 
 // Validação de string vazia
 
@@ -95,4 +100,13 @@ function validacaoData(value) {
   return !((data[1] == 2 || data[1] == 4 || data[1] == 6 || data[1] == 9 || data[1] == 11) && data[0] > 30);
 }
 
-export { validacaoApenasLetras, validacaoApenasNumeros, validacaoCEP, validacaoCPF, validacaoEmail, validacaoVazia, validacaoData }
+function validacaoDataViagem(value) {
+  const dataAtual = new Date();
+  const anoAtual = dataAtual.getFullYear();
+  let data = value.split('/');
+  for (let d of data) if (!validacaoApenasNumeros(d)) return false;
+  if (data[0] > 31 || data[1] > 12 || data[2] < 1920 || data[2] != anoAtual) return false;
+  return !((data[1] == 2 || data[1] == 4 || data[1] == 6 || data[1] == 9 || data[1] == 11) && data[0] > 30);
+}
+
+export { validacaoDataViagem, validacaoHora, validacaoApenasLetras, validacaoApenasNumeros, validacaoCEP, validacaoCPF, validacaoEmail, validacaoVazia, validacaoData }

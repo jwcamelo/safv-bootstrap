@@ -1,9 +1,6 @@
 
 import { limparCampos } from './util.js'
 import { campos, validaMotorista } from "./motorista-fieldValidation.mjs";
-import { sendHttpRequest } from "./xhr.js";
-
-
 
 validaMotorista()
 
@@ -21,7 +18,7 @@ for (let button of limpar) {
 //Sair
 const sair = document.querySelector('.btn-exit');
 sair.addEventListener('click', function () {
-  window.location.href = `../motorista-consultar.html`
+  window.location.href = `../motorista/motorista-consultar.html`
 });
 
 //Salvar
@@ -39,25 +36,24 @@ salvar.addEventListener('click', function (e) {
 });
 
 const salvarMotorista = () => {
-  sendHttpRequest('POST', `https://safvroma.herokuapp.com/motorista/`, {
-
-    nome: campos.nome.value,
-    sobrenome: campos.sobrenome.value,
-    cpf: campos.cpf.value.replaceAll(".", "").replace("-", ""),
-    dataNascimento: campos.dataNasc.value,
-    cnh: campos.cnh.value,
-    categoria:  campos.categoria.value.toUpperCase(),
-    logradouro: campos.logradouro.value,
-    numero: parseInt(campos.numero.value),
-    cep: parseInt(campos.cep.value.replace('.', "").replace('-', "")),
-    complemento: campos.complemento.value,
-    email: campos.email.value
-
-  }).then(console.log("dados salvos")).catch(err => { console.log(err) });
-
-  setTimeout(() => {
-    window.location.href = `../motorista-consultar.html`
-  }, "2000")
+  fetch("/motorista", {
+    method: 'POST',
+    body: JSON.stringify({
+      nome: campos.nome.value,
+      sobrenome: campos.sobrenome.value,
+      cpf: campos.cpf.value.replaceAll(".", "").replace("-", ""),
+      dataDeNascimento: campos.dataNasc.value,
+      cnh: campos.cnh.value,
+      categoria: campos.categoria.value.toUpperCase(),
+      logradouro: campos.logradouro.value,
+      numero: parseInt(campos.numero.value),
+      cep: parseInt(campos.cep.value.replace('.', "").replace('-', "")),
+      complemento: campos.complemento.value,
+      email: campos.email.value,
+      sexo: campos.sexo.value
+    }),
+    headers: { "content-type": "application/json" }
+  }).then(window.location.href = `../motorista/motorista-consultar.html`)
 }
 
 
