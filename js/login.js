@@ -81,12 +81,21 @@ function logar(e) {
       }),
       headers: { "content-type": "application/json" }
     }).then(async (resp) => {
+
       const response = await resp.text();
       if (response !== 'autenticação falhou') {
-        location.href = '/restrito/home.html';
+
         document.querySelector('.alert-incorrect-pwd').classList.add('d-none');
+
         sessionStorage.setItem("usuarioLogado", response);
         sessionStorage.setItem("tipoUsuario", tipoUsuario);
+        console.log(JSON.parse(response))
+
+        if ((JSON.parse(response).admin)) {
+          location.href = '/restrito/home.html';
+        } else {
+          location.href = '/viagem/home.html';
+        }
       } else {
         document.querySelector('.alert-incorrect-pwd').classList.remove('d-none');
         senha.classList.remove('is-valid');

@@ -1,0 +1,180 @@
+body {
+  background: #eee;
+}
+
+button {
+  min-width: 80px;
+}
+
+.content {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.dropdown a {
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown a,
+.dropdown a:hover,
+.dropdown a.show {
+  background: none;
+  border: none;
+}
+
+
+hr.h-color {
+  color: #eee;
+}
+
+.hidden {
+  display: none;
+}
+
+i {
+  margin-right: 10px;
+}
+
+.fa-trash {
+  color: rgba(255, 0, 0, 0.918);
+}
+
+.Cardes {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+}
+
+#cardDash {
+  width: 570px;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.totalViagem {
+  text-align: center;
+  padding: 0px 20px;
+  height: 30%;
+  background-color: white;
+  border-radius: 8px;
+  border-top: solid #193073 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+}
+
+.totalViagem h6 {
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.cardDash {
+  width: 45%;
+  margin-top: 25px;
+  height: 320px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  border-top: solid #193073 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+  display: flex;
+  flex-direction: column;
+}
+
+.boxSeach {
+  width: 100%;
+  height: 15%;
+}
+
+.boxSeach select {
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.graficoLocais {
+  display: flex;
+  height: 85%;
+  width: 100%;
+  background-color: red;
+}
+
+.graficoLocais img {
+  width: 100%;
+  height: 100%;
+}
+
+#containerDash {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+form h4 {
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.navbar {
+  background: #cad2e5;
+}
+
+.sidebar li.active {
+  background: #eee;
+  border-radius: 8px;
+}
+
+.sidebar li.active a,
+.sidebar li.active a:hover {
+  color: #000
+}
+
+.sidebar li a {
+  color: #fff;
+}
+
+#side_nav {
+  background: #193073;
+  min-width: 250px;
+  max-width: 250px;
+  transition: all 0.3s;
+}
+
+table {
+  text-align: center;
+}
+
+td i {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 880px) {
+  #side_nav {
+    margin-left: -250px;
+    position: absolute;
+    min-height: 100vh;
+    z-index: 1;
+  }
+
+  #side_nav.active {
+    margin-left: 0;
+
+  }
+}
+
+@media screen and (max-width:550px) {
+  .visible-md-block {
+    display: none;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .visible-sm-block {
+    display: none;
+  }
+
+}

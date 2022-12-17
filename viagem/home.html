@@ -9,8 +9,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/chart.css">
   <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/chart.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
 </head>
@@ -38,9 +38,9 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="viagem/viagem-solicitar.html">Solicitar viagem</a></li>
-              <li><a class="dropdown-item" href="viagem/viagem-consultar.html">Consultar viagens</a></li>
-              <li><a class="dropdown-item" href="viagem/viagem-relatorio.html">Relatórios</a></li>
+              <li><a class="dropdown-item" href="viagem-solicitar.html">Solicitar viagem</a></li>
+              <li><a class="dropdown-item" href="#">Consultar viagens</a></li>
+              <li><a class="dropdown-item" href="#">Relatórios</a></li>
             </ul>
           </div>
         </li>
@@ -53,9 +53,9 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="motorista/motorista-cadastrar.html">Cadastrar motorista</a></li>
-              <li><a class="dropdown-item" href="motorista/motorista-consultar.html">Consultar motoristas</a></li>
-              <li><a class="dropdown-item" href="motorista/motorista-relatorio.html">Relatórios</a></li>
+              <li><a class="dropdown-item" href="#">Cadastrar motorista</a></li>
+              <li><a class="dropdown-item" href="#">Consultar motoristas</a></li>
+              <li><a class="dropdown-item" href="#">Relatórios</a></li>
             </ul>
           </div>
         </li>
@@ -68,9 +68,9 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="veiculo/veiculo-cadastrar.html">Cadastrar veículo</a></li>
-              <li><a class="dropdown-item" href="veiculo/veiculo-consultar.html">Consultar veículos</a></li>
-              <li><a class="dropdown-item" href="veiculo/veiculo-relatorio.html">Relatórios</a></li>
+              <li><a class="dropdown-item" href="#">Cadastrar veículo</a></li>
+              <li><a class="dropdown-item" href="#">Consultar veículos</a></li>
+              <li><a class="dropdown-item" href="#">Relatórios</a></li>
             </ul>
           </div>
         </li>
@@ -82,9 +82,9 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="servidor/servidor-cadastrar.html">Cadastrar servidor</a></li>
-              <li><a class="dropdown-item" href="servidor/servidor-consultar.html">Consultar servidores</a></li>
-              <li><a class="dropdown-item" href="servidor/servidor-relatorio.html">Relatórios</a></li>
+              <li><a class="dropdown-item" href="#">Cadastrar servidor</a></li>
+              <li><a class="dropdown-item" href="#">Consultar servidores</a></li>
+              <li><a class="dropdown-item" href="#">Relatórios</a></li>
             </ul>
           </div>
         </li>
@@ -128,7 +128,7 @@
       </nav>
 
       <!--Main Content-->
-      <div class="dashboard-content px-3 pt-4">
+      <div id="main" class="dashboard-content px-3 pt-4">
         <div class="container">
 
           <div class="container-img">
@@ -164,58 +164,58 @@
               </div>
             </section>
           </div>
+
         </div>
       </div>
     </div>
-  </div>
+    <script>
+      var imagem = document.getElementById('imgLocal')
+      var imagemMes = document.getElementById('imgMes')
 
-  <script>
-    var imagem = document.getElementById('imgLocal')
-    var imagemMes = document.getElementById('imgMes')
+      var locais = document.getElementById('locais')
+      var viagensMes = document.getElementById('viagensMes')
 
-    var locais = document.getElementById('locais')
-    var viagensMes = document.getElementById('viagensMes')
-
-    function filtro1(item) {
-      if (item === "1") {
-        imagemMes.setAttribute('src', '../img/viagensMes.png')
-      } else if (item === "2") {
-        imagemMes.setAttribute('src', '../img/janeiro.png')
-      } else if (item === "3") {
-        imagemMes.setAttribute('src', '../img/fevereiro.png')
-      } else if (item === "4") {
-        imagemMes.setAttribute('src', '../img/marco.png')
-      } else if (item === "5") {
-        imagemMes.setAttribute('src', '../img/abril.png')
-      } else if (item === "6") {
-        imagemMes.setAttribute('src', '../img/maio.png')
-      } else {
-        imagemMes.setAttribute('src', '../img/junho.png')
-      }
-    }
-
-    function filtro2(item) {
-      if (item === "1") {
-        imagem.setAttribute('src', '../img/partida.png')
-      } else {
-        imagem.setAttribute('src', '../img/destino.png')
+      function filtro1(item) {
+        if (item === "1") {
+          imagemMes.setAttribute('src', '../img/viagensMes.png')
+        } else if (item === "2") {
+          imagemMes.setAttribute('src', '../img/janeiro.png')
+        } else if (item === "3") {
+          imagemMes.setAttribute('src', '../img/fevereiro.png')
+        } else if (item === "4") {
+          imagemMes.setAttribute('src', '../img/marco.png')
+        } else if (item === "5") {
+          imagemMes.setAttribute('src', '../img/abril.png')
+        } else if (item === "6") {
+          imagemMes.setAttribute('src', '../img/maio.png')
+        } else {
+          imagemMes.setAttribute('src', '../img/junho.png')
+        }
       }
 
-    }
+      function filtro2(item) {
+        if (item === "1") {
+          imagem.setAttribute('src', '../img/partida.png')
+        } else {
+          imagem.setAttribute('src', '../img/destino.png')
+        }
+
+      }
 
 
 
-  </script>
+    </script>
 
 
-  <script src="../js/jquery-3.6.1.min.js"></script>
-  <script src="https://kit.fontawesome.com/dbbc73e88d.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
-  <script src="../js/maskedinput.js"></script>
-  <script type="module" src="../js/util.js"></script>
-  <script type="module" src="../js/home.js"></script>
+
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/dbbc73e88d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"></script>
+    <script src="../js/maskedinput.js"></script>
+    <script type="module" src="../js/util.js"></script>
+    <script type="module" src="../js/home.js"></script>
 
 </body>
 

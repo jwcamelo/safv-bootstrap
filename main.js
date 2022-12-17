@@ -19,11 +19,19 @@ app.use((req, res, next) => {
 });
 
 app.use(express.urlencoded())
-app.use(session({ secret: "abc" }))
+app.use(session({ secret: "muY/OFlnZ9muY/OFlnZ9t" }))
 app.set('port', process.env.PORT || 3000)
 
 // Secção de login
 app.use('/restrito/*', (req, res, next) => {
+  if (req.session.admin) {
+    next();
+  } else {
+    res.redirect('../index.html')
+  }
+})
+
+app.use('/viagem/*', (req, res, next) => {
   if (req.session.email) {
     next();
   } else {
@@ -45,12 +53,18 @@ app.post('/login', (req, res) => {
   let email = req.body.email;
 
   const url = `https://safv-api-production.up.railway.app/${tipoUsuario}/email/${email}`
+  console.log(url)
 
   //Request API getUserByEmail
   axios.get(url)
     .then(function (response) {
       if (req.body.senha === Crypt.Decrypt(response.data.senha)) {
-        req.session.email = email;
+
+        if (response.data.admin) {
+          req.session.admin = true;
+        } else {
+          req.session.email = email;
+        }
         res.send(response.data);
       } else {
         res.send('autenticação falhou')
@@ -67,6 +81,7 @@ app.post('/login', (req, res) => {
 // Logoff
 app.get("/logoff", (req, res) => {
   req.session.email = null;
+  req.session.admin = null
   res.send("logff");
 })
 
@@ -79,14 +94,14 @@ app.put("/alterarSenha", (req, res) => {
   if (tipoUsuario == 'motorista') {
     const {
       nome, sobrenome, cpf, dataDeNascimento, logradouro, numero, cep, complemento, email, sexo, primeiroAcesso,
-      senha, cnh, categoria
+      cnh, categoria
     } = req.body.usuarioLogado;
 
+    let senhaUsuario = req.body.usuarioLogado.senha
 
-    const assunto = "Alteracao de senha realizada no SAFV"
-    const texto = `Nova senha: ${senhaAleatoria}`
-    const recebedor = email;
-    Mailer.sendEmail(assunto, texto, recebedor)
+    const senha = Crypt.Encrypt(senhaUsuario).toString();
+
+
 
     //Request API update user
     axios.put(`https://safv-api-production.up.railway.app/motorista/${usuario.cnh}`, {
@@ -94,6 +109,10 @@ app.put("/alterarSenha", (req, res) => {
       senha, cnh, categoria
     })
       .then(function (response) {
+        const assunto = "Alteracao de senha realizada no SAFV"
+        const texto = `Nova senha: ${senhaUsuario}`
+        const recebedor = email;
+        Mailer.sendEmail(assunto, texto, recebedor)
         req.session.email = null;
         res.send(response.status)
       })
@@ -107,8 +126,12 @@ app.put("/alterarSenha", (req, res) => {
   if (tipoUsuario == 'servidor') {
     const {
       nome, sobrenome, cpf, dataDeNascimento, logradouro, numero, cep, complemento, email, sexo, primeiroAcesso,
-      senha, emailSes, matricula, admin
+      emailSes, matricula, admin
     } = req.body.usuarioLogado;
+
+    let senhaUsuario = req.body.usuarioLogado.senha
+
+    const senha = Crypt.Encrypt(senhaUsuario).toString();
 
     const idSetor = usuario.setor.id;
     const idFuncao = usuario.funcao.id;
@@ -119,6 +142,10 @@ app.put("/alterarSenha", (req, res) => {
       senha, emailSes, matricula, admin, idSetor, idFuncao
     })
       .then(function (response) {
+        const assunto = "Alteracao de senha realizada no SAFV"
+        const texto = `Nova senha: ${senhaUsuario}`
+        const recebedor = emailSes;
+        Mailer.sendEmail(assunto, texto, recebedor)
         req.session.email = null;
         res.send(response.status)
       })
@@ -163,17 +190,10 @@ app.post('/motorista', (req, res) => {
 
   const primeiroAcesso = false;
 
-  const senhaAleatoria = Math.random().toString(36).substring(0, 7);
-  console.log(senhaAleatoria)
-
-  const assunto = "Cadastro realizado no SAFV"
-  const texto = `Seu cadastro foi realizado. Login: ${email} / Senha: ${senhaAleatoria}`
-  const recebedor = email;
-  Mailer.sendEmail(assunto, texto, recebedor)
-
+  const senhaAleatoria = Math.random().toString(36).substring(0, 10);
 
   const senha = Crypt.Encrypt(senhaAleatoria).toString();
-  console.log("senha = " + senha)
+
 
   // Request API create user
   axios.post(`https://safv-api-production.up.railway.app/motorista`, {
@@ -181,6 +201,11 @@ app.post('/motorista', (req, res) => {
     logradouro, numero, cep, complemento, email, cnh, categoria, sexo, senha, primeiroAcesso
   })
     .then(function (response) {
+      //Envio do email de cadastro
+      const assunto = "Cadastro realizado no SAFV"
+      const texto = `Seu cadastro foi realizado. Login: ${email} / Senha: ${senhaAleatoria}`
+      const recebedor = email;
+      Mailer.sendEmail(assunto, texto, recebedor)
       console.log(response.data)
       res.send(response.status)
     })
@@ -249,13 +274,11 @@ app.post('/servidor', (req, res) => {
   } = req.body;
 
   const primeiroAcesso = false;
-  const admin = true;
+  const admin = false;
 
-  const senhaAleatoria = Math.random().toString(36).substring(0, 7);
-  console.log(senhaAleatoria)
+  const senhaAleatoria = Math.random().toString(36).substring(0, 10);
 
   const senha = Crypt.Encrypt(senhaAleatoria).toString();
-  console.log("senha = " + senha)
 
   // Request API create servidor
   axios.post(`https://safv-api-production.up.railway.app/servidor`, {
@@ -263,6 +286,11 @@ app.post('/servidor', (req, res) => {
     logradouro, numero, cep, complemento, email, matricula, sexo, primeiroAcesso, admin
   })
     .then(function (response) {
+      //Envio do email de cadastro
+      const assunto = "Cadastro realizado no SAFV"
+      const texto = `Seu cadastro foi realizado. Login: ${emailSes} / Senha: ${senhaAleatoria}`
+      const recebedor = emailSes;
+      Mailer.sendEmail(assunto, texto, recebedor)
       console.log(response.data)
       res.send(response.status)
     })

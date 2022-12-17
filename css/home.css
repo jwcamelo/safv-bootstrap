@@ -1,0 +1,13 @@
+.container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: space-around;
+  height: min-content;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(230, 235, 241, 0.866);
+}
+
+#img-mobile {
+  width: 250px;
+}
